@@ -104,3 +104,11 @@ Metro 模块 842 的 rnPlatform 使用 createEngineServiceTransport，配置 `re
 发布树只包含 community/、当前启动器、说明及根级开发配置。测试脚本改为从本仓库 devDependencies 导入 Playwright，不再借用 original/node_modules。npm start 指向当前本地服务，npm run verify 可在新克隆中生成规则副本后执行校验。捕获的 upstream/mobile 和卡图字节不作改写。
 
 历史调查与较早验证记录保留为来源证据；其中描述的旧目录或旧依赖路径不再是当前发布版的使用步骤。当前说明以根目录 README.md、START-HERE.md 为准。
+
+## 2026-10-24 新增雷克塞与三套牌打法速查
+
+用户要求增加挖掘机上位构筑并解释现有奥恩、狗头与挖掘机的打法。新增 Nick Berkhout - Icemayne 在 2026-10-11 CCS Sunday $5,000 Riftbound Event #6 的总排名第 1 卡表，赛事 58 人。以 TopDeck 主办方原始卡表为准，另用 RiftDecks 和 RiftAtlas 赛事记录交叉确认；来源 URL 随 SavedDeck 一并保存。没有将同英雄最佳或瑞士轮普通参赛表误标成区域赛八强。
+
+卡表按本地已有普通卡号映射，保留主牌 39 + 英雄 1、符文 12、战场 3、备牌 10 的原张数。原奥恩和内瑟斯条目逐对象比较保持一致。增量种入机制沿用既有 seeded 记录，加入新推荐时不会覆盖用户已有编辑，也不会复活用户主动移出的老推荐。
+
+PLAY-GUIDE.md 按这三套的实际主牌说明起手、资源、关键配合与常见误算，结合当前卡面与展示/返费交互说明。特别区分：奥恩的专用万能符能、狗头先全额支付再重置符文且法术不触发返费、雷克塞传奇翻牌不免单，以及虚空猛冲和垓兽的展示效果。没有重写规则引擎。

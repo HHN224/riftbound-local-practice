@@ -11,6 +11,7 @@ const seeds = JSON.parse(
     "utf8",
   ),
 ).decks;
+const seedCount = seeds.length;
 const copy = (value) => structuredClone(value);
 function memory() {
   const data = new Map();
@@ -39,11 +40,11 @@ test("recommendations and legacy migration run once; explicit removals survive r
     ],
   };
   store.initialize(seeds, [legacy]);
-  assert.equal(store.list().length, 3);
+  assert.equal(store.list().length, seedCount + 1);
   store.remove(seeds[1].id);
   const reloaded = createPersonalDeckStore(storage, validate);
   reloaded.initialize(seeds, [legacy]);
-  assert.equal(reloaded.list().length, 2);
+  assert.equal(reloaded.list().length, seedCount);
   assert(!reloaded.get(seeds[1].id));
 });
 test("reordered copies deduplicate and preserve provenance; renames and edits persist", () => {
@@ -60,7 +61,7 @@ test("reordered copies deduplicate and preserve provenance; renames and edits pe
   };
   const saved = store.save(imported);
   assert.equal(saved.id, seeds[0].id);
-  assert.equal(store.list().length, 2);
+  assert.equal(store.list().length, seedCount);
   assert.equal(saved.source.player, "MICE TheManLand");
   const reloaded = createPersonalDeckStore(storage, validate);
   assert.equal(reloaded.get(saved.id).name, "我的奥恩");
@@ -72,7 +73,7 @@ test("reordered copies deduplicate and preserve provenance; renames and edits pe
     ],
   };
   reloaded.save(edit);
-  assert.equal(reloaded.list().length, 2);
+  assert.equal(reloaded.list().length, seedCount);
 });
 test("one malformed deck rejects a whole backup without partially importing", () => {
   const storage = memory(),
@@ -109,7 +110,7 @@ test("an invalid legacy deck does not block valid recommendations or get deleted
   const invalid = { ...copy(seeds[0]), id: "old-invalid", name: "invalid" };
   const skipped = store.initialize(seeds, [invalid]);
   assert.equal(skipped.length, 1);
-  assert.equal(store.list().length, 2);
+  assert.equal(store.list().length, seedCount);
   assert.equal(invalid.name, "invalid");
 });
 test("exported backup round trips and does not share object references", () => {
@@ -119,7 +120,29 @@ test("exported backup round trips and does not share object references", () => {
   const backup = store.backup();
   const second = createPersonalDeckStore(memory(), validate);
   second.saveMany(JSON.parse(JSON.stringify(backup)).decks);
-  assert.equal(second.list().length, 2);
+  assert.equal(second.list().length, seedCount);
   backup.decks[0].name = "changed";
   assert.notEqual(store.list()[0].name, "changed");
+});
+test("adding a recommendation preserves edited decks and previously removed recommendations", () => {
+  const storage = memory(),
+    store = createPersonalDeckStore(storage, validate);
+  const previous = seeds.slice(0, 2),
+    added = seeds.slice(2);
+  store.initialize(previous, []);
+  const edited = store.save({
+    ...previous[0],
+    name: "我自己的奥恩",
+    mainDeckCardIds: [
+      ...previous[0].mainDeckCardIds.slice(1),
+      previous[0].mainDeckCardIds.at(-1),
+    ],
+  });
+  store.remove(previous[1].id);
+  const before = JSON.stringify(store.get(edited.id));
+  createPersonalDeckStore(storage, validate).initialize(seeds, []);
+  assert.equal(JSON.stringify(store.get(edited.id)), before);
+  assert.equal(store.get(previous[1].id), undefined);
+  for (const deck of added) assert(store.get(deck.id));
+  assert.equal(store.list().length, 1 + added.length);
 });

@@ -2,6 +2,13 @@ import { chromium } from "playwright";
 import fs from "node:fs/promises";
 import assert from "node:assert/strict";
 const origin = "http://127.0.0.1:" + (process.env.FUXUAN_PORT || 4174);
+const recommendedDecks = JSON.parse(
+  await fs.readFile(
+    new URL("../public/local/recommended-decks.json", import.meta.url),
+    "utf8",
+  ),
+).decks;
+const seedCount = recommendedDecks.length;
 const browser = await chromium.launch({ channel: "msedge", headless: true });
 const context = await browser.newContext({
   viewport: { width: 1366, height: 768 },
@@ -38,13 +45,13 @@ const submit = () =>
 try {
   await page.goto(origin + "/fuxuan/");
   await page.waitForFunction(() => !!globalThis.FuxuanLocal?.personalDecks);
-  assert.equal(await count(), 2);
+  assert.equal(await count(), seedCount);
   await open();
-  assert.equal(await page.locator(".pd-deck").count(), 2);
+  assert.equal(await page.locator(".pd-deck").count(), seedCount);
   await page.getByTestId("personal-deck-search").fill("内瑟斯");
   assert.equal(await page.locator(".pd-deck").count(), 1);
   await page.getByTestId("personal-deck-search").fill("");
-  assert.equal(await page.locator(".pd-deck").count(), 2);
+  assert.equal(await page.locator(".pd-deck").count(), seedCount);
   const art = page.locator(".pd-deck img").first();
   await art.hover();
   await page.getByTestId("local-card-hover").waitFor({ state: "visible" });
@@ -59,7 +66,7 @@ try {
   await ornn.getByRole("button", { name: "使用这套卡组", exact: true }).click();
   assert.equal(await shelf.inputValue(), "personal-ornn-la-2026");
   await page.getByTestId("save-current-deck").click();
-  assert.equal(await count(), 2);
+  assert.equal(await count(), seedCount);
   await page.reload();
   await page.waitForFunction(() => !!FuxuanLocal.personalDecks);
   assert.equal(await shelf.inputValue(), "personal-ornn-la-2026");
@@ -78,7 +85,7 @@ try {
     .locator(".pd-import-status")
     .filter({ hasText: "已保存" })
     .waitFor();
-  assert.equal(await count(), 2);
+  assert.equal(await count(), seedCount);
   let saved = await personal();
   assert.equal(
     saved.find((d) => d.id === "personal-ornn-la-2026").name,
@@ -90,7 +97,7 @@ try {
   );
   await codeInput.fill("this is not a deck");
   await submit();
-  assert.equal(await count(), 2);
+  assert.equal(await count(), seedCount);
   assert(
     !(await page.locator(".pd-import-status").innerText()).includes("已保存"),
   );
@@ -113,7 +120,7 @@ try {
     .locator(".pd-import-status")
     .filter({ hasText: "已保存" })
     .waitFor();
-  assert.equal(await count(), 3);
+  assert.equal(await count(), seedCount + 1);
   // A backup containing an unknown card is rejected atomically.
   const before = JSON.stringify(await personal());
   const invalid = {
@@ -138,7 +145,7 @@ try {
   await page.getByTestId("backup-personal-decks").click();
   const download = await downloadPromise;
   const backup = JSON.parse(await fs.readFile(await download.path(), "utf8"));
-  assert.equal(backup.decks.length, 3);
+  assert.equal(backup.decks.length, seedCount + 1);
   // Original builder saves automatically synchronize to the personal snapshot.
   await row.getByRole("button", { name: "编辑", exact: true }).click();
   await page.getByText("保存卡组", { exact: true }).waitFor();
@@ -154,15 +161,15 @@ try {
   const nasus = page.locator('[data-deck-id="personal-nasus-la-2026"]');
   await nasus.getByRole("button", { name: "移出个人列表" }).click();
   await nasus.getByRole("button", { name: "确认移出" }).click();
-  assert.equal(await count(), 2);
+  assert.equal(await count(), seedCount);
   await page.reload();
   await page.waitForFunction(() => !!FuxuanLocal.personalDecks);
-  assert.equal(await count(), 2);
+  assert.equal(await count(), seedCount);
   // Restore the user's downloaded backup through the import UI.
   await open();
   await codeInput.fill(JSON.stringify(backup));
   await submit();
-  assert.equal(await count(), 3);
+  assert.equal(await count(), seedCount + 1);
   await page.getByTestId("close-personal-decks").click();
   await page.evaluate(() =>
     __r(841).deckStore.deleteDeck("personal-ornn-la-2026"),
@@ -179,8 +186,10 @@ try {
   // Fast switching does not disturb opponents/settings, and each list reaches
   // the original native game's action phase with its chosen hero and legend.
   const games = [];
-  for (const hero of ["奥恩", "内瑟斯"]) {
-    const d = (await personal()).find((d) => d.heroName === hero);
+  for (const recommendation of recommendedDecks) {
+    const d = (await personal()).find(
+      (d) => d.heroName === recommendation.heroName,
+    );
     await shelf.selectOption(d.id);
     await page.getByText("人机对战 // VS AI", { exact: true }).click();
     assert.equal(await page.locator(".pd-shelf").isVisible(), false);

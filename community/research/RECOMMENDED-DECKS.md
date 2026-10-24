@@ -1,18 +1,19 @@
 # 个人练牌列表的推荐卡组
 
-导入文件：`community/public/local/recommended-decks.json`。两套都来自 [Riot 官方洛杉矶区域资格赛卡表](https://playriftbound.com/en-us/news/organizedplay/los-angeles-top-decks/)（2026-09-30 发布，2026-10-24 读取）。没有自行改动赛事构筑或添加副传奇。
+导入文件：`community/public/local/recommended-decks.json`。奥恩和内瑟斯来自 [Riot 官方洛杉矶区域资格赛卡表](https://playriftbound.com/en-us/news/organizedplay/los-angeles-top-decks/)（2026-09-30 发布，2026-10-24 读取）；雷克塞来自主办方公布的 [CCS 第 6 期冠军卡表](https://topdeck.gg/deck/ccs-sunday-5000-riftbound-event-6/7unCv71a0PeXL6aWkXG4tKn3nXl1)。没有自行改动赛事构筑或添加副传奇。打法见 [PLAY-GUIDE.md](PLAY-GUIDE.md)。
 
 | 个人列表名称 | 选手与实际成绩 | 传奇 / 英雄 | 符文 |
 | --- | --- | --- | --- |
 | 奥恩 · 洛杉矶八强 · 装备引擎 | MICE TheManLand，总排名第 8 | 山隐之焰 `SFD·189/221` / 奥恩 `SFD·058/221` | 翠意 8 / 灵光 4 |
 | 内瑟斯 · 洛杉矶同英雄最佳 · 跳费控制 | Niguel，同英雄最佳，总排名第 142 | 沙漠死神 `VEN·145` / 内瑟斯 `VEN·046` | 翠意 6 / 灵光 6 |
+| 雷克塞 · CCS 第6期冠军 · 征服续航 | Nick Berkhout - Icemayne，2026-10-11，58 人，总排名第 1 | 虚空遁地兽 `SFD·187/221` / 雷克塞 `SFD·029/221` | 炽烈 7 / 序理 5 |
 
 每套均为英雄 1 + 其余主牌 39、符文 12、战场 3、备牌 10。`sourceCards` 保留赛事原文卡名和张数，`source` 保留选手、赛事、名次和来源链接。内瑟斯的 Best-Of 是该英雄的最高排名，不是整场赛事八强。
 
 英文卡名通过 [Riftcodex 卡牌数据 API](https://api.riftcodex.com/cards) 的 `riftbound_id` 对应本地捕获卡表，再选相同卡号的普通版本；没有根据中文同名英雄猜测印次。卡牌效果与实际运行继续使用已保留的 APK 规则和网页卡表。列表不依赖在线接口，启动后全部从本地 JSON 导入。
 
-这是此前推荐的第四弹环境赛事构筑。第五弹 Radiance 在 2026-10-23 发售，未将两套旧构筑标为新环境最强。来源：[官方系列说明](https://playriftbound.com/en-us/news/announcements/the-radiance-overview/)。
+三套都是第五弹之前的赛事构筑。第五弹 Radiance 在 2026-10-23 发售，未将它们标为新环境最强。来源：[官方系列说明](https://playriftbound.com/en-us/news/announcements/the-radiance-overview/)。
 
-验证范围：全部本地卡号存在；套牌数量与作者重复张数/副传奇检查通过；两套均可通过人机赛前流程进入原规则宿主的行动阶段。未逐张验证全部配合，也不是与 Android 原生端同种子对照的等价性证明。
+验证范围：全部本地卡号存在；套牌数量与作者重复张数/副传奇检查通过；三套均可通过人机赛前流程进入原规则宿主的行动阶段。未逐张验证全部配合，也不是与 Android 原生端同种子对照的等价性证明。
 
 首次加载个人列表时，在当前浏览器中各导入一次。用户之后编辑、重命名、移出列表或刷新时，不会被初始推荐数据覆盖或重新加回。用户修改构筑后，以用户保存的副本为准。

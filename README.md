@@ -21,7 +21,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File community/Start-Local.ps1 -N
 ## 使用
 
 - 首页「个人卡组列表」可以导入卡组码、保存当前卡组、编辑、搜索、重命名和备份；上方下拉框快速切换。
-- 已预置奥恩洛杉矶八强、内瑟斯同英雄最佳两套完整赛事构筑，并保留来源与名次。
+- 已预置奥恩洛杉矶八强、内瑟斯同英雄最佳、雷克塞 CCS 冠军三套完整赛事构筑，并保留来源与名次。
 - 鼠标悬停卡面放大；右键或按 `I` 固定查看，`Esc` 关闭。每块战场有「查看效果」按钮。
 - 卡组存于当前浏览器。换浏览器前可导出全部备份；刷新或关闭网页会结束当前对局。
 
@@ -55,6 +55,7 @@ npm run test:browser
 | [BUILD.md](community/engine/BUILD.md) | Hermes 宿主构建及运行方式 |
 | [VALIDATION.md](community/research/VALIDATION.md) | 已验证范围和限制 |
 | [RECOMMENDED-DECKS.md](community/research/RECOMMENDED-DECKS.md) | 预置卡表来源 |
+| [PLAY-GUIDE.md](community/research/PLAY-GUIDE.md) | 奥恩、狗头、挖掘机起手与打法速查 |
 | [FINDINGS.md](community/research/FINDINGS.md) | 原始调查与版本证据 |
 
 ## 来源与版本

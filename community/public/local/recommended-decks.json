@@ -246,6 +246,136 @@
           [6, "Mind Rune"]
         ]
       }
+    },
+    {
+      "id": "personal-reksai-ccs6-2026",
+      "name": "雷克塞 · CCS 第6期冠军 · 征服续航",
+      "createdAt": 0,
+      "updatedAt": 0,
+      "legendCardId": "SFD·187/221",
+      "secondaryLegendCardIds": [],
+      "heroCardId": "SFD·029/221",
+      "mainDeckCardIds": [
+        "UNL-153/219",
+        "UNL-153/219",
+        "UNL-153/219",
+        "UNL-002/219",
+        "UNL-002/219",
+        "UNL-002/219",
+        "OGN·010/298",
+        "OGN·010/298",
+        "OGN·010/298",
+        "VEN·128",
+        "VEN·128",
+        "VEN·128",
+        "VEN·124",
+        "VEN·124",
+        "OGN·211/298",
+        "OGN·211/298",
+        "OGN·211/298",
+        "UNL-028/219",
+        "OGN·012/298",
+        "OGN·012/298",
+        "OGN·012/298",
+        "SFD·175/221",
+        "SFD·175/221",
+        "SFD·175/221",
+        "SFD·003/221",
+        "SFD·003/221",
+        "SFD·003/221",
+        "OGN·004/298",
+        "OGN·004/298",
+        "OGN·209/298",
+        "OGN·209/298",
+        "OGN·209/298",
+        "OGN·029/298",
+        "OGN·029/298",
+        "OGN·029/298",
+        "OGN·224/298",
+        "SFD·188/221",
+        "SFD·188/221",
+        "OGN·212/298"
+      ],
+      "runeCardIds": [
+        "OGN·007/298",
+        "OGN·007/298",
+        "OGN·007/298",
+        "OGN·007/298",
+        "OGN·007/298",
+        "OGN·007/298",
+        "OGN·007/298",
+        "OGN·214/298",
+        "OGN·214/298",
+        "OGN·214/298",
+        "OGN·214/298",
+        "OGN·214/298"
+      ],
+      "battlefieldCardIds": ["UNL-210/219", "VEN·160", "OGN·291/298"],
+      "sideboardCardIds": [
+        "UNL-028/219",
+        "UNL-176/219",
+        "OGN·009/298",
+        "OGN·009/298",
+        "VEN·003",
+        "VEN·003",
+        "VEN·131",
+        "OGN·213/298",
+        "OGN·212/298",
+        "OGN·212/298"
+      ],
+      "heroColors": ["red", "yellow"],
+      "legendName": "虚空遁地兽",
+      "heroName": "雷克塞",
+      "source": {
+        "url": "https://topdeck.gg/deck/ccs-sunday-5000-riftbound-event-6/7unCv71a0PeXL6aWkXG4tKn3nXl1",
+        "event": "2026-10-11 CCS $5,000 第6期（58人）",
+        "player": "Nick Berkhout - Icemayne",
+        "placement": 1,
+        "label": "总排名第 1",
+        "published": "2026-10-11",
+        "imported": "2026-10-24",
+        "secondaryUrl": "https://riftdecks.com/riftbound-metagame/deck-reksai-void-burrower-333407"
+      },
+      "sourceCards": {
+        "legend": "Rek'Sai, Void Burrower",
+        "hero": "Rek'Sai, Breacher",
+        "main": [
+          [3, "Carrion Dredger"],
+          [3, "Inferna"],
+          [3, "Legion Rearguard"],
+          [3, "Noxian Emissary"],
+          [2, "Escaped Grayback"],
+          [3, "Faithful Manufactor"],
+          [1, "Pyke, Dockside Butcher"],
+          [3, "Noxus Hopeful"],
+          [3, "Undertitan"],
+          [3, "Blood Rush"],
+          [2, "Cleave"],
+          [3, "Cull the Weak"],
+          [3, "Falling Star"],
+          [1, "Salvage"],
+          [2, "Void Rush"],
+          [1, "Forge of the Future"]
+        ],
+        "sideboard": [
+          [1, "Pyke, Dockside Butcher"],
+          [1, "Vi, Peacekeeper"],
+          [2, "Hextech Ray"],
+          [2, "Brittle Steel"],
+          [1, "Decree of Unity"],
+          [1, "Hidden Blade"],
+          [2, "Forge of the Future"]
+        ],
+        "battlefields": [
+          "Forbidding Waste",
+          "Mystic Vortex",
+          "The Candlelit Sanctum"
+        ],
+        "runes": [
+          [7, "Fury Rune"],
+          [5, "Order Rune"]
+        ]
+      }
     }
   ]
 }
