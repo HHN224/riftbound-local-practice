@@ -3,14 +3,19 @@
   "version": "0.1.0",
   "description": "符玄战场本地练牌：原 APK 规则与 AI、网页对局和个人卡组。",
   "private": true,
-  "engines": {"node": ">=20"},
-  "devDependencies": {"playwright": "1.64.1"},
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "playwright": "1.64.1"
+  },
   "scripts": {
     "start": "node community/scripts/prepare-engine.mjs && node community/scripts/server.mjs",
     "test": "node community/scripts/test-personal-deck-store.mjs",
     "verify": "node community/scripts/prepare-engine.mjs && node community/scripts/verify-snapshot.mjs && node community/scripts/verify-local.mjs",
     "test:browser": "node community/scripts/probe-browser.mjs && node community/scripts/probe-features.mjs",
     "test:readability": "node community/scripts/probe-readability.mjs",
+    "test:scoring": "node community/scripts/probe-final-point.mjs",
     "test:decks": "node community/scripts/test-personal-deck-store.mjs && node community/scripts/probe-personal-decks.mjs",
     "community:start": "node community/scripts/prepare-engine.mjs && node community/scripts/server.mjs",
     "community:test": "node community/scripts/probe-browser.mjs && node community/scripts/probe-features.mjs",
