@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "sandbox-template",
+  "name": "空白场景",
+  "createdAt": 0,
+  "updatedAt": 0,
+  "seed": "sandbox-template-seed",
+  "turnNumber": 1,
+  "currentPlayer": "p1",
+  "players": {
+    "p1": {
+      "score": 0,
+      "experience": 0,
+      "legend": null,
+      "hero": null,
+      "hand": [],
+      "mainDeck": [],
+      "deckFillerCount": 30,
+      "graveyard": [],
+      "exile": [],
+      "baseUnits": [],
+      "baseEquipment": [],
+      "runes": [],
+      "runeDeck": []
+    },
+    "p2": {
+      "score": 0,
+      "experience": 0,
+      "legend": null,
+      "hero": null,
+      "hand": [],
+      "mainDeck": [],
+      "deckFillerCount": 30,
+      "graveyard": [],
+      "exile": [],
+      "baseUnits": [],
+      "baseEquipment": [],
+      "runes": [],
+      "runeDeck": []
+    }
+  },
+  "battlefields": [
+    {
+      "ref": "battlefield-1",
+      "templateId": null,
+      "controller": null,
+      "units": [],
+      "standby": []
+    },
+    {
+      "ref": "battlefield-2",
+      "templateId": null,
+      "controller": null,
+      "units": [],
+      "standby": []
+    }
+  ],
+  "runtime": {
+    "opponentMode": "manual"
+  }
+}

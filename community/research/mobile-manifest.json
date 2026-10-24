@@ -1,0 +1,21 @@
+{
+  "sourceFile": "application-1020.apk",
+  "apkBytes": 131822076,
+  "apkSha256": "a59e8dae8ec8c71a062913385998d03791e140f5bce13d0dd15a2b9500e0ea82",
+  "package": "com.senhe.riftboundmobile",
+  "configVersion": "1.1.1",
+  "bundleBytes": 11062920,
+  "bundleSha256": "027d40cea4063f4d1e8c2658319adf6ec2eee3492c96291814963278ab61c07c",
+  "hermesMagic": "c61fbc03c103191f",
+  "bytecodeVersion": 98,
+  "symbols": {
+    "createLocalGameHost": 1388992,
+    "createWorkerLocalGameHost": 946007,
+    "createRoutedGameTransport": 1370692,
+    "resolveCombatDamage": 1115661,
+    "aiDifficulty": 1390505,
+    "aiStrategy": 1390614,
+    "initSandbox": 949686
+  },
+  "limitations": "String presence is static evidence only; not a full offline gameplay test."
+}

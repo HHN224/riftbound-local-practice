@@ -1,0 +1,162 @@
+{
+  "source": "https://letstcg.xyz/fuxuan/",
+  "capturedAt": "2026-10-23T18:24:25.325Z",
+  "files": [
+    {
+      "url": "https://letstcg.xyz/fuxuan/",
+      "path": "fuxuan/index.html",
+      "bytes": 2512,
+      "sha256": "4465869048b5cea86299d99ebe42a5d55bd268286257e096d05fd42c1f60884b"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/manifest.webmanifest",
+      "path": "fuxuan/manifest.webmanifest",
+      "bytes": 598,
+      "sha256": "1bbff3eba64b8c38b165e9d704571a5aae282dc0359ecec0d3608b9e54dfb4e7"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/apple-touch-icon.png",
+      "path": "fuxuan/apple-touch-icon.png",
+      "bytes": 57187,
+      "sha256": "5020104fdc15a1ebda96409c5f7b29bff21b1873d7a98270176af8fcc2c54879"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/favicon.ico",
+      "path": "fuxuan/favicon.ico",
+      "bytes": 14510,
+      "sha256": "8184b2ca6c201c87bade03c6d01497e4cd1a416046ca8a48db0ae3c3c758fc8c"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/_expo/static/js/web/__expo-metro-runtime-3959ce7b26b61ab4053a4b8b218e528d.js",
+      "path": "fuxuan/_expo/static/js/web/__expo-metro-runtime-3959ce7b26b61ab4053a4b8b218e528d.js",
+      "bytes": 3892,
+      "sha256": "6bea381ffe54ea3f6b757cb73021d19c7d8546fe323e89b8b3ef8a5ddb7d92e4"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/_expo/static/js/web/__common-c7dabeb633635f1195ec96ec77d3a99e.js",
+      "path": "fuxuan/_expo/static/js/web/__common-c7dabeb633635f1195ec96ec77d3a99e.js",
+      "bytes": 288939,
+      "sha256": "bf7ffb3343a3b9ca65294474cd8d441fbccd9e8c8c8d0a1f4c200091b3a252f7"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/_expo/static/js/web/index-92f1a2c5a651d75c03f7dcacb2be1b8f.js",
+      "path": "fuxuan/_expo/static/js/web/index-92f1a2c5a651d75c03f7dcacb2be1b8f.js",
+      "bytes": 1526438,
+      "sha256": "ee2de69b56b6224e3a4be7257bbe6efb0b3d7e382cf700a82e09a1ed241b6c73"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/_expo/static/js/web/AppRootOnline-fe7b1e3ebb6f38998e4ee616cc10d8ed.js",
+      "path": "fuxuan/_expo/static/js/web/AppRootOnline-fe7b1e3ebb6f38998e4ee616cc10d8ed.js",
+      "bytes": 2495882,
+      "sha256": "6f7a920a45927c81eaef4ee6edf21fe950b3356ea88a56718954ee53a053482a"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/_expo/static/js/web/index-8c59480f789528a420eb1184782e05f3.js",
+      "path": "fuxuan/_expo/static/js/web/index-8c59480f789528a420eb1184782e05f3.js",
+      "bytes": 22754,
+      "sha256": "1c364bc9a08389a0964b40698eba3019a29da7b8e8083287f08615493483eae8"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/assets/emotes/emoji-thanks.36abaf798d5e1da7a08df40f6c3faaf1.png",
+      "path": "fuxuan/assets/assets/emotes/emoji-thanks.36abaf798d5e1da7a08df40f6c3faaf1.png",
+      "bytes": 138874,
+      "sha256": "c559622e60a9b479b2f5689baf1e4d7e8e2216f5148e92172f9aab34e1f245f7"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/assets/emotes/emoji-take-it-easy.1ea1653ed7b8ddf9d18c0caa3b7ca87f.png",
+      "path": "fuxuan/assets/assets/emotes/emoji-take-it-easy.1ea1653ed7b8ddf9d18c0caa3b7ca87f.png",
+      "bytes": 133652,
+      "sha256": "5e1a95ea2cc7930ee965bdb0d79c0fca741aaa812ab677a360071c4b10320c9d"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/assets/emotes/emoji-well-played.c885b02104a5aeecc14751cf2c61e001.png",
+      "path": "fuxuan/assets/assets/emotes/emoji-well-played.c885b02104a5aeecc14751cf2c61e001.png",
+      "bytes": 136156,
+      "sha256": "bd700d3608976b133234b82c63ed82e0abd8687d5b563eee4ff22b623b62aef4"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/assets/emotes/emoji-misplay.afd8ccc252c9356add9bcfb3466d68d3.png",
+      "path": "fuxuan/assets/assets/emotes/emoji-misplay.afd8ccc252c9356add9bcfb3466d68d3.png",
+      "bytes": 148968,
+      "sha256": "38d461b36552bad8e19189bf1217e6262baee537a219573ccda50ea193811381"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/assets/emotes/emoji-bug.630627d4b7816834178bf23cabd7c63a.png",
+      "path": "fuxuan/assets/assets/emotes/emoji-bug.630627d4b7816834178bf23cabd7c63a.png",
+      "bytes": 139333,
+      "sha256": "03989c871e39e10ae09bab65aaa2abc36f3ae68d388d16b9eebec2c357b06b7b"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/assets/emotes/emoji-take-it-outside.36ed83c4636bd2798b6413c708e9f079.png",
+      "path": "fuxuan/assets/assets/emotes/emoji-take-it-outside.36ed83c4636bd2798b6413c708e9f079.png",
+      "bytes": 143449,
+      "sha256": "2fc9cda11d57ebfaee495979ceaf743484f6e81fbf0f6f275ca7666305b4827e"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/assets/emotes/emoji-surrender.f7495533f6215c9925a078bb786b24b9.png",
+      "path": "fuxuan/assets/assets/emotes/emoji-surrender.f7495533f6215c9925a078bb786b24b9.png",
+      "bytes": 148228,
+      "sha256": "766a7bb0f969f3ea78fa471bb8a46080af185e3f267068f340498c98e37037e1"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/assets/emotes/emoji-watch-me.c45e46c89a361fc84b985783434b6845.png",
+      "path": "fuxuan/assets/assets/emotes/emoji-watch-me.c45e46c89a361fc84b985783434b6845.png",
+      "bytes": 2191350,
+      "sha256": "b3eb630f6b8b84486ae5f9894aa6e9c539a94a7d3496723c307d1d760298c79d"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/_expo/static/js/web/index-c91ef0d98e0d584a1eed6ff9040ba243.js",
+      "path": "fuxuan/_expo/static/js/web/index-c91ef0d98e0d584a1eed6ff9040ba243.js",
+      "bytes": 4196,
+      "sha256": "d7b567d93c3c547e32c8e2dcefec2595d306a262eac0f0f33eaa6e040642f407"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/blackGradient.f2f2afbd980094abcc79545970861890.png",
+      "path": "fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/blackGradient.f2f2afbd980094abcc79545970861890.png",
+      "bytes": 76300,
+      "sha256": "b3b412ac552704e760838d90da857e2cc989907cac08136ab4abdb3bb94258fa"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/Hue.a90c87d7032f455d2b9af120cb5d5570.png",
+      "path": "fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/Hue.a90c87d7032f455d2b9af120cb5d5570.png",
+      "bytes": 135062,
+      "sha256": "5cf70e44d0ed5b2045b5b324d6b8e019ab4324eee0120b7410c35e96f84af707"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/circularHue.edc64fe7b7ecf42f96ada6651580a8ae.png",
+      "path": "fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/circularHue.edc64fe7b7ecf42f96ada6651580a8ae.png",
+      "bytes": 130942,
+      "sha256": "c32b35aff10e9106af0baed4509dbd1acc40fdeb0de0edc6d74013ede3e13b6a"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/blackRadial.e82607f320e9da14480ea79a5f3fb101.png",
+      "path": "fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/blackRadial.e82607f320e9da14480ea79a5f3fb101.png",
+      "bytes": 64044,
+      "sha256": "17fb4e64db16b1554a63d3dfab56b25fcd280cef2c10027ac5518a7f2bce917b"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/grid.bd95c6f01f0efbe68bc0d03356c618b9.png",
+      "path": "fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/grid.bd95c6f01f0efbe68bc0d03356c618b9.png",
+      "bytes": 3299,
+      "sha256": "5b8be1f0898d49d30c4bccef63cf24922b618ba78604b0902709e21819f5f9c3"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/angular-luminance.8a1e8612eda5a668f1075688e07e1e7b.png",
+      "path": "fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/angular-luminance.8a1e8612eda5a668f1075688e07e1e7b.png",
+      "bytes": 115169,
+      "sha256": "dd3b725cb08cb8a04c981d7f427749f305b0ce53cead95eeb4c2f2df7559d056"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/transparent-texture.24cc1dbca996610e8c164927ecca93ac.png",
+      "path": "fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/transparent-texture.24cc1dbca996610e8c164927ecca93ac.png",
+      "bytes": 192,
+      "sha256": "0e8053a508fa72b33d24558d3c38fbffb429d79b68279d0078f0e804903277bd"
+    },
+    {
+      "url": "https://letstcg.xyz/fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/arrow-icon.948b3316b55d8793caf8c6c5b92641b5.png",
+      "path": "fuxuan/assets/__node_modules/reanimated-color-picker/lib/module/assets/arrow-icon.948b3316b55d8793caf8c6c5b92641b5.png",
+      "bytes": 243,
+      "sha256": "862946e9f2fa762c80337ac0bbfb3ed8cc664646779b5379bbb140ffa6220e1a"
+    }
+  ]
+}

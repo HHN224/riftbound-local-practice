@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="description" content="Riftbound 同人在线对战平台" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="符玄战场" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="manifest" href="/fuxuan/manifest.webmanifest" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/fuxuan/apple-touch-icon.png" />
+    <title>符玄战场</title>
+    <style id="expo-reset">
+      html,
+      body,
+      #root {
+        width: 100%;
+        height: 100%;
+        height: 100dvh;
+        margin: 0;
+        background: #0a0a0a;
+        overscroll-behavior: none;
+      }
+      body {
+        overflow: hidden;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      #root {
+        display: flex;
+        flex: 1;
+      }
+      /* 覆盖 RNW Text/Image 的默认行为，也包含挂在 body 下的 Modal。 */
+      body * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none !important;
+        user-select: none !important;
+      }
+      img,
+      a {
+        -webkit-user-drag: none;
+      }
+      input,
+      textarea,
+      [contenteditable]:not([contenteditable="false"]),
+      [contenteditable]:not([contenteditable="false"]) * {
+        -webkit-touch-callout: default;
+        -webkit-user-select: text !important;
+        user-select: text !important;
+      }
+    </style>
+  <link rel="icon" href="/fuxuan/favicon.ico"/></head>
+  <body>
+    <noscript>需要启用 JavaScript 才能进入在线对战平台。</noscript>
+    <div id="root"></div>
+  <script src="/fuxuan/_expo/static/js/web/__expo-metro-runtime-3959ce7b26b61ab4053a4b8b218e528d.js" defer></script><script src="/fuxuan/_expo/static/js/web/__common-c7dabeb633635f1195ec96ec77d3a99e.js" defer></script><script src="/fuxuan/_expo/static/js/web/index-92f1a2c5a651d75c03f7dcacb2be1b8f.js" defer></script>
+</body>
+</html>

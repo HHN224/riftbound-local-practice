@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "id": "sandbox-before-combat",
+  "name": "交战前局面",
+  "createdAt": 0,
+  "updatedAt": 0,
+  "seed": "sandbox-before-combat-seed",
+  "turnNumber": 3,
+  "currentPlayer": "p1",
+  "players": {
+    "p1": {
+      "score": 0,
+      "experience": 0,
+      "legend": null,
+      "hero": null,
+      "hand": [
+        {
+          "ref": "p1-hand-1",
+          "templateId": "OGN·001/298"
+        }
+      ],
+      "mainDeck": [],
+      "deckFillerCount": 30,
+      "graveyard": [],
+      "exile": [],
+      "baseUnits": [
+        {
+          "ref": "p1-base-1",
+          "templateId": "OGN·001/298",
+          "tapped": false
+        }
+      ],
+      "baseEquipment": [],
+      "runes": [
+        {
+          "ref": "p1-rune-1",
+          "color": "red",
+          "tapped": false,
+          "flipped": false
+        },
+        {
+          "ref": "p1-rune-2",
+          "color": "red",
+          "tapped": false,
+          "flipped": false
+        },
+        {
+          "ref": "p1-rune-3",
+          "color": "red",
+          "tapped": false,
+          "flipped": false
+        },
+        {
+          "ref": "p1-rune-4",
+          "color": "red",
+          "tapped": false,
+          "flipped": false
+        },
+        {
+          "ref": "p1-rune-5",
+          "color": "red",
+          "tapped": false,
+          "flipped": false
+        },
+        {
+          "ref": "p1-rune-6",
+          "color": "red",
+          "tapped": false,
+          "flipped": false
+        }
+      ],
+      "runeDeck": []
+    },
+    "p2": {
+      "score": 0,
+      "experience": 0,
+      "legend": null,
+      "hero": null,
+      "hand": [],
+      "mainDeck": [],
+      "deckFillerCount": 30,
+      "graveyard": [],
+      "exile": [],
+      "baseUnits": [],
+      "baseEquipment": [],
+      "runes": [
+        {
+          "ref": "p2-rune-1",
+          "color": "red",
+          "tapped": false,
+          "flipped": false
+        },
+        {
+          "ref": "p2-rune-2",
+          "color": "red",
+          "tapped": false,
+          "flipped": false
+        },
+        {
+          "ref": "p2-rune-3",
+          "color": "red",
+          "tapped": false,
+          "flipped": false
+        },
+        {
+          "ref": "p2-rune-4",
+          "color": "red",
+          "tapped": false,
+          "flipped": false
+        },
+        {
+          "ref": "p2-rune-5",
+          "color": "red",
+          "tapped": false,
+          "flipped": false
+        },
+        {
+          "ref": "p2-rune-6",
+          "color": "red",
+          "tapped": false,
+          "flipped": false
+        }
+      ],
+      "runeDeck": []
+    }
+  },
+  "battlefields": [
+    {
+      "ref": "battlefield-1",
+      "templateId": null,
+      "controller": "p2",
+      "units": [
+        {
+          "ref": "p2-field-1",
+          "templateId": "OGN·001/298",
+          "owner": "p2",
+          "tapped": false
+        }
+      ],
+      "standby": []
+    },
+    {
+      "ref": "battlefield-2",
+      "templateId": null,
+      "controller": null,
+      "units": [],
+      "standby": []
+    }
+  ],
+  "runtime": {
+    "opponentMode": "manual"
+  }
+}

@@ -1,0 +1,200 @@
+/* Desktop reading aids. No transforms on the board or gameplay hit targets. */
+[data-testid="self-rune-zone-toggle"] {
+  border: 1px solid #bb9b58 !important;
+  border-radius: 8px !important;
+  background: #25211b !important;
+  padding: 22px 12px 5px !important;
+  height: auto !important;
+  min-height: 76px;
+  max-width: 68vw;
+  overflow-x: auto !important;
+}
+[data-testid="self-rune-zone-toggle"]::before {
+  content: "符文 / 费用 · 点击展开";
+  position: absolute;
+  left: 12px;
+  top: 3px;
+  color: #ffe1a0;
+  font:
+    700 14px/18px "Microsoft YaHei",
+    sans-serif;
+  white-space: nowrap;
+}
+[data-testid="self-rune-zone-panel"] {
+  border: 1px solid #bb9b58 !important;
+  border-radius: 8px !important;
+  top: auto !important;
+  bottom: calc(20vh + 12px) !important;
+  left: 20px !important;
+  width: calc(100vw - 180px) !important;
+  flex-direction: column !important;
+}
+[data-testid="self-rune-zone-panel"]::before {
+  content: "符文 / 费用　·　短按横置，长按回收　·　悬停看大图";
+  padding: 10px 16px;
+  color: #ffe1a0;
+  font:
+    700 16px/24px "Microsoft YaHei",
+    sans-serif;
+}
+.fx-field-inspect {
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  z-index: 25;
+  min-height: 44px;
+  max-width: calc(100% - 24px);
+  padding: 8px 14px;
+  border: 1px solid #d4b778;
+  border-radius: 7px;
+  background: #191b20f5;
+  color: #ffe6b0;
+  box-shadow: 0 2px 12px #0009;
+  font:
+    700 16px/24px "Microsoft YaHei",
+    sans-serif;
+  cursor: pointer;
+}
+.fx-field-inspect:hover,
+.fx-field-inspect:focus-visible {
+  background: #433726;
+  outline: 2px solid #ffe6b0;
+}
+.fx-reader,
+.fx-reader * {
+  box-sizing: border-box;
+}
+.fx-reader {
+  position: fixed;
+  z-index: 2147483646;
+  padding: 12px;
+  border: 1px solid #d4b778;
+  border-radius: 12px;
+  background: #141820fa;
+  color: #f5f1e8;
+  box-shadow: 0 16px 60px #000c;
+  font-family: "Microsoft YaHei", sans-serif;
+}
+.fx-reader[hidden] {
+  display: none !important;
+}
+.fx-hover {
+  pointer-events: none;
+  width: min(420px, 42vw);
+  text-align: center;
+}
+.fx-reader img {
+  display: block;
+  object-fit: contain;
+  margin: 0 auto;
+  max-width: 100%;
+}
+.fx-reader img[hidden] {
+  display: none;
+}
+.fx-hover img {
+  width: 100%;
+  height: min(72vh, 630px);
+}
+.fx-landscape-hover {
+  width: min(620px, 48vw);
+}
+.fx-landscape-art {
+  position: relative;
+  width: 100%;
+}
+.fx-reader .fx-landscape-art img {
+  position: absolute;
+  max-width: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  margin: 0;
+}
+.fx-reader h2 {
+  margin: 8px 0;
+  font-size: 22px;
+  line-height: 1.4;
+}
+.fx-reader p {
+  margin: 8px 0;
+  line-height: 1.7;
+}
+.fx-hint {
+  font-size: 14px;
+  color: #d6c5a4;
+}
+.fx-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: #000a;
+}
+.fx-modal[hidden] {
+  display: none;
+}
+.fx-modal .fx-reader {
+  position: relative;
+  width: min(1000px, 96vw);
+  max-height: 94vh;
+  overflow: auto;
+  padding: 22px;
+}
+.fx-reader-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(240px, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+.fx-modal img {
+  width: 100%;
+  height: min(80vh, 820px);
+}
+.fx-reader-text {
+  padding-top: 40px;
+  font-size: 18px;
+}
+.fx-reader-description {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.fx-close {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  min-width: 100px;
+  min-height: 44px;
+  color: #fff;
+  background: #323945;
+  border: 1px solid #8993a4;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.fx-close:focus-visible {
+  outline: 3px solid #ffe6b0;
+}
+.fx-image-error {
+  font-size: 16px;
+  color: #ffe6b0;
+}
+@media (max-width: 700px) {
+  .fx-reader-layout {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .fx-reader-text {
+    padding-top: 0;
+  }
+  .fx-modal img {
+    height: 60vh;
+    margin-top: 40px;
+  }
+  .fx-field-inspect {
+    font-size: 14px;
+    padding: 6px 8px;
+  }
+}

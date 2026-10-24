@@ -1,0 +1,15 @@
+**/node_modules/
+**/runtime/
+**/test-results/
+*.log
+community/tools/
+community/research/*.readable.js
+community/research/mobile-ascii-strings.txt
+community/research/mobile-disassembly.txt
+community/research/mobile-decompiled.js
+community/installers/
+community/generated/
+# The retired project and its launchers stay local, outside release history.
+/original/
+/启动原版练牌.cmd
+/启动符文战场.cmd

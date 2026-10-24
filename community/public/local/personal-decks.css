@@ -1,0 +1,331 @@
+.pd-shelf,
+.pd-overlay,
+.pd-toast {
+  font-family: "Microsoft YaHei", sans-serif;
+  color: #f5f1e8;
+  box-sizing: border-box;
+}
+.pd-shelf *,
+.pd-overlay * {
+  box-sizing: border-box;
+}
+.pd-shelf[hidden],
+.pd-overlay[hidden],
+.pd-toast[hidden] {
+  display: none !important;
+}
+.pd-shelf {
+  position: fixed;
+  z-index: 110;
+  top: 8px;
+  left: 330px;
+  right: 120px;
+  max-width: 860px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 6px 12px;
+  background: #141820f5;
+  border: 1px solid #ad915a;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px #0008;
+}
+.pd-shelf label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.pd-shelf select {
+  min-width: 0;
+  flex: 1;
+  width: 180px;
+}
+.pd-shelf button,
+.pd-shelf select,
+.pd-overlay button,
+.pd-overlay input,
+.pd-overlay textarea {
+  font: inherit;
+  font-size: 16px;
+  color: #f5f1e8;
+  background: #222a36;
+  border: 1px solid #647084;
+  border-radius: 6px;
+  padding: 9px 12px;
+  min-height: 44px;
+}
+.pd-shelf button,
+.pd-overlay button {
+  cursor: pointer;
+}
+.pd-shelf button {
+  white-space: nowrap;
+}
+.pd-shelf button:hover,
+.pd-overlay button:hover {
+  background: #3b4658;
+}
+.pd-shelf .pd-primary,
+.pd-overlay .pd-primary {
+  background: #b51b30;
+  border-color: #f07786;
+  font-weight: 700;
+}
+.pd-shelf :focus-visible,
+.pd-overlay :focus-visible {
+  outline: 3px solid #ffe0a0;
+  outline-offset: 2px;
+}
+.pd-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483645;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #05070cdd;
+}
+.pd-dialog {
+  display: flex;
+  flex-direction: column;
+  width: min(1240px, 96vw);
+  height: min(850px, 94vh);
+  background: #111722;
+  border: 1px solid #a68a57;
+  border-radius: 14px;
+  box-shadow: 0 16px 90px #000b;
+  overflow: hidden;
+}
+.pd-dialog header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 22px 26px 12px;
+  border-bottom: 1px solid #344054;
+}
+.pd-eyebrow {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #d3b67c;
+}
+.pd-dialog h1 {
+  font-size: 28px;
+  margin: 7px 0;
+}
+.pd-dialog h2 {
+  font-size: 19px;
+  line-height: 1.5;
+  margin: 0 0 8px;
+}
+.pd-dialog p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #bcc6d8;
+  margin: 6px 0;
+}
+.pd-tools {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 26px 0;
+}
+.pd-tools label {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex: 1;
+}
+.pd-tools input {
+  width: min(380px, 100%);
+}
+.pd-dialog .pd-status {
+  padding: 0 26px;
+  color: #ffe0a0;
+  min-height: 25px;
+}
+.pd-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr);
+  gap: 22px;
+  padding: 0 26px 24px;
+  min-height: 0;
+  flex: 1;
+}
+.pd-list {
+  overflow: auto;
+  min-height: 0;
+  padding: 2px 6px 8px 2px;
+}
+.pd-deck {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr);
+  gap: 16px;
+  padding: 18px;
+  background: #1b2432;
+  border: 1px solid #42516a;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+.pd-deck img {
+  width: 74px;
+  height: 104px;
+  object-fit: contain;
+  border-radius: 5px;
+}
+.pd-deck-info {
+  min-width: 0;
+}
+.pd-deck h2 {
+  overflow-wrap: anywhere;
+}
+.pd-deck p {
+  font-size: 14px;
+}
+.pd-deck a {
+  color: #e7c88c;
+  font-size: 13px;
+  line-height: 1.6;
+  display: inline-block;
+}
+.pd-deck-actions {
+  grid-column: 1/-1;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.pd-deck-actions button {
+  font-size: 14px;
+}
+.pd-import {
+  overflow: auto;
+  padding: 18px;
+  background: #171e2a;
+  border: 1px solid #344054;
+  border-radius: 10px;
+}
+.pd-import label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 15px;
+  margin: 16px 0;
+}
+.pd-import input,
+.pd-import textarea {
+  width: 100%;
+  background: #0d1320;
+}
+.pd-import textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+.pd-import .pd-file {
+  font-size: 14px;
+}
+.pd-import input[type="file"] {
+  font-size: 13px;
+  padding: 8px;
+}
+.pd-import button[type="submit"] {
+  width: 100%;
+}
+.pd-import .pd-import-status {
+  color: #ffe0a0;
+  overflow-wrap: anywhere;
+}
+.pd-inline {
+  grid-column: 1/-1;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 14px;
+}
+.pd-inline input {
+  flex: 1;
+  min-width: 120px;
+}
+.pd-empty {
+  padding: 20px;
+}
+.pd-toast {
+  position: fixed;
+  z-index: 2147483647;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  padding: 14px 22px;
+  max-width: 90vw;
+  border: 1px solid #d4b778;
+  border-radius: 9px;
+  background: #222a36;
+  font-size: 16px;
+  box-shadow: 0 8px 30px #0008;
+}
+@media (max-width: 1150px) {
+  .pd-shelf {
+    left: 240px;
+    right: 100px;
+    gap: 7px;
+    padding: 8px;
+  }
+  .pd-shelf label {
+    font-size: 0;
+  }
+  .pd-shelf button {
+    font-size: 14px;
+  }
+  .pd-body {
+    grid-template-columns: minmax(0, 1.4fr) minmax(260px, 1fr);
+  }
+}
+@media (max-width: 760px) {
+  .pd-shelf {
+    top: 110px;
+    left: 12px;
+    right: 12px;
+  }
+  .pd-shelf select {
+    width: 100px;
+  }
+  .pd-overlay {
+    padding: 8px;
+  }
+  .pd-dialog {
+    height: 96vh;
+  }
+  .pd-body {
+    display: block;
+    overflow: auto;
+    padding: 0 14px 14px;
+  }
+  .pd-list {
+    overflow: visible;
+  }
+  .pd-dialog header {
+    padding: 16px;
+  }
+  .pd-tools {
+    padding: 12px 16px 0;
+  }
+  .pd-tools label {
+    display: block;
+  }
+  .pd-deck {
+    grid-template-columns: 55px minmax(0, 1fr);
+    padding: 12px;
+  }
+  .pd-deck img {
+    width: 55px;
+    height: 77px;
+  }
+  .pd-tools button {
+    font-size: 13px;
+  }
+}

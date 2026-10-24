@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-24",
+  "hostSha256": "16a1179a6313cb6dc5722a2733fb1f5a402ef4f19a66d511be7bcb9e507461d6",
+  "fullMatch": {
+    "final": {
+      "phase": "action",
+      "turn": 5,
+      "current": "opponent",
+      "winner": "opponent",
+      "winReason": "normal",
+      "score": [
+        0,
+        8
+      ],
+      "errors": [],
+      "prompt": null,
+      "cursor": 398
+    },
+    "browserErrors": [],
+    "failedResources": [],
+    "externalRequests": [],
+    "resultPanelAndRestart": "passed; see result-ui.log and probe-browser.mjs assertions"
+  },
+  "features": {
+    "savedDeck": true,
+    "played": {
+      "hand": 0,
+      "base": 2,
+      "runes": 5
+    },
+    "moved": {
+      "score": 1,
+      "errors": [],
+      "units": [
+        "sandbox_card_p1-base-1"
+      ]
+    },
+    "restarted": true,
+    "errors": []
+  },
+  "originalTests": {
+    "passed": 12,
+    "failed": 0
+  },
+  "upstreamFiles": 26,
+  "apkAssets": 1535
+}

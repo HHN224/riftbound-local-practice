@@ -1,0 +1,14 @@
+* text=auto
+*.png binary
+*.webp binary
+*.jpg binary
+*.ico binary
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.bundle binary
+*.apk binary
+*.exe binary
+*.hbc binary
+community/upstream/** -text
+community/mobile/** -text
