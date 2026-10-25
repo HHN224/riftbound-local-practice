@@ -122,6 +122,8 @@
   for (const [tag, attribute, path] of [
     ["link", "href", "/local/selection-frames.css"],
     ["script", "src", "/local/selection-frames.js"],
+    ["link", "href", "/local/ai-thinking.css"],
+    ["script", "src", "/local/ai-thinking.js"],
   ]) {
     const element = document.createElement(tag);
     if (tag === "link") element.rel = "stylesheet";

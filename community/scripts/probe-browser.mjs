@@ -34,6 +34,18 @@ try {
   await page.goto(origin + "/fuxuan/");
   await page.getByText("人机对战 // VS AI", { exact: true }).waitFor();
   await page.evaluate(() => {
+    window.thinkingEvents = [];
+    window.thinkingVisible = 0;
+    FuxuanLocal.transport.on("serverMessage", (message) => {
+      if (message.type === "aiThinking") {
+        window.thinkingEvents.push(message.payload);
+        if (
+          message.payload.thinking &&
+          !document.querySelector('[data-testid="local-ai-thinking"]').hidden
+        )
+          window.thinkingVisible++;
+      }
+    });
     const t = FuxuanLocal.transport,
       emit = t.emit.bind(t);
     t.emit = (event, payload, callback) =>
@@ -144,6 +156,20 @@ try {
     JSON.stringify(state, null, 2),
   );
   const result = { final, played, errors, failed, external, history };
+  const thinking = await page.evaluate(() => ({
+    signals: window.thinkingEvents.length,
+    shown: window.thinkingVisible,
+  }));
+  assert(
+    thinking.signals > 0 && thinking.shown > 0,
+    "Real APK AI signals must display the thinking indicator",
+  );
+  assert.equal(
+    await page.getByTestId("local-ai-thinking").isVisible(),
+    false,
+    "Spinner must clear after game end",
+  );
+  console.log("AI thinking feedback", thinking);
   await fs.writeFile(
     "community/test-results/browser-result.json",
     JSON.stringify(result, null, 2),

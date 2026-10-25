@@ -1,0 +1,49 @@
+.fx-ai-thinking[hidden] {
+  display: none;
+}
+.fx-ai-thinking {
+  position: fixed;
+  top: 82px;
+  left: 48%;
+  transform: translateX(-50%);
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 22px 13px 17px;
+  border: 1px solid #5c353a;
+  border-left: 3px solid #e8001c;
+  background: #151517f5;
+  box-shadow: 0 5px 20px #0008;
+  color: #fff;
+  font:
+    700 17px/1.4 "Microsoft YaHei",
+    sans-serif;
+  pointer-events: none;
+}
+.fx-ai-thinking small {
+  display: block;
+  color: #b9b9c1;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 3px;
+}
+.fx-thinking-spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid #ffffff30;
+  border-top-color: #ff2640;
+  border-radius: 50%;
+  animation: fx-thinking-spin 0.8s linear infinite;
+}
+@keyframes fx-thinking-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-thinking-spinner {
+    animation: none;
+    border-right-color: #ff2640;
+  }
+}

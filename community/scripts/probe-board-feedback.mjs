@@ -98,9 +98,61 @@ try {
     "rgb(255, 215, 0)",
   );
   await page.screenshot({ path: "community/test-results/board-feedback.png" });
+  const thinking = page.getByTestId("local-ai-thinking");
+  assert.equal(
+    await thinking.isVisible(),
+    false,
+    "Manual Sandbox has no AI thinking",
+  );
+  const signal = async (active) =>
+    page.evaluate(
+      (active) =>
+        FuxuanLocal.transport.deliver("serverMessage", {
+          type: "aiThinking",
+          payload: { aiPlayerId: "test-opponent", thinking: active },
+        }),
+      active,
+    );
+  await signal(true);
+  await thinking.waitFor({ state: "visible" });
+  assert.equal(
+    await thinking.evaluate((el) => getComputedStyle(el).pointerEvents),
+    "none",
+  );
+  await page.screenshot({ path: "community/test-results/ai-thinking.png" });
+  await signal(false);
+  assert.equal(await thinking.isVisible(), false);
+  await signal(true);
+  await page.evaluate(() =>
+    FuxuanLocal.transport.deliver("serverMessage", {
+      type: "aiDecision",
+      payload: { aiPlayerId: "test-opponent" },
+    }),
+  );
+  assert.equal(
+    await thinking.isVisible(),
+    false,
+    "Decision clears the spinner",
+  );
+  await signal(true);
+  await page.evaluate(() => FuxuanLocal.transport.deliver('serverMessage',{
+    type:'error',payload:{errors:['test transport error']}
+  }));
+  assert.equal(await thinking.isVisible(),false,'Error clears the spinner');
+  await page.evaluate(()=>__r(841).useGameStore.setState({lastErrors:[]}));
+  assert.equal(await thinking.isVisible(),false,'Unrelated updates must not revive a failed request');
+  await signal(true);
+  await page.evaluate(() =>
+    __r(841).useGameStore.setState({ winner: "player" }),
+  );
+  assert.equal(
+    await thinking.isVisible(),
+    false,
+    "Match end clears the spinner",
+  );
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: both playmats ignore hover/I; actual legend cards remain readable.",
+    "PASS: decorative art excluded, real legends readable, rotated selection colors/geometry, AI start/stop/decision/error/end feedback.",
   );
 } finally {
   await browser.close();
