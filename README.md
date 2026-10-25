@@ -20,9 +20,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File community/Start-Local.ps1 -N
 
 ## 使用
 
-- 首页「个人卡组列表」可以导入卡组码、保存当前卡组、编辑、搜索、重命名和备份；上方下拉框快速切换。
+- 首页底部「我的卡组」打开独立收藏页，可导入、保存、搜索、编辑和备份；点击「使用这套卡组」返回首页开局。
 - 已预置奥恩洛杉矶八强、内瑟斯与杰斯同英雄最佳、雷克塞 CCS 冠军、第五弹艾克萨城 Nexus 第 5 名共五套完整赛事构筑，并保留来源与名次。
 - 鼠标悬停卡面放大；右键或按 `I` 固定查看，`Esc` 关闭。每块战场有「查看效果」按钮。
+- 桌布插画不触发传奇预览，选框跟随卡面横置；AI 计算出牌时显示「对手正在思考」。
 - 卡组存于当前浏览器。换浏览器前可导出全部备份；刷新或关闭网页会结束当前对局。
 
 ## 开发与检查
@@ -40,6 +41,7 @@ npm test
 npm ci
 npm run test:decks
 npm run test:readability
+npm run test:feedback
 npm run test:browser
 ```
 

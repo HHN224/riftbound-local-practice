@@ -135,12 +135,19 @@ try {
     "Decision clears the spinner",
   );
   await signal(true);
-  await page.evaluate(() => FuxuanLocal.transport.deliver('serverMessage',{
-    type:'error',payload:{errors:['test transport error']}
-  }));
-  assert.equal(await thinking.isVisible(),false,'Error clears the spinner');
-  await page.evaluate(()=>__r(841).useGameStore.setState({lastErrors:[]}));
-  assert.equal(await thinking.isVisible(),false,'Unrelated updates must not revive a failed request');
+  await page.evaluate(() =>
+    FuxuanLocal.transport.deliver("serverMessage", {
+      type: "error",
+      payload: { errors: ["test transport error"] },
+    }),
+  );
+  assert.equal(await thinking.isVisible(), false, "Error clears the spinner");
+  await page.evaluate(() => __r(841).useGameStore.setState({ lastErrors: [] }));
+  assert.equal(
+    await thinking.isVisible(),
+    false,
+    "Unrelated updates must not revive a failed request",
+  );
   await signal(true);
   await page.evaluate(() =>
     __r(841).useGameStore.setState({ winner: "player" }),

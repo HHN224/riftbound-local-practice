@@ -120,3 +120,13 @@ PLAY-GUIDE.md 按这三套的实际主牌说明起手、资源、关键配合与
 新增 ASC Brandon 的 Riot 官方洛杉矶卡表：153 名杰斯中的第 1、赛事总排名第 42，保留完整主备。另新增 Big Nonsense 在 Sacramento Nexus Night 的 3-0-0、第 5 名艾克提交卡表；主办方页显示 Oct 23，聚合站列表显示 Oct 24，来源字段保留主办方日期。该场 64 人、3 轮瑞士轮，不标为区域赛八强。完整来源、第五弹卡号核对及限制见 RECOMMENDED-DECKS.md。
 
 个人列表沿用增量种入，两套新增数据不覆盖已有三套的任何字段。测试使用单独端口 4175 和隔离的后台 Edge 配置，未刷新或操作用户页面。网页/原 APK 宿主接受第五弹艾克套牌并进入行动阶段；验证并非对全部第五弹技能的逐卡证明，也不表示本机 APK 与线上远程规则服务器同步。
+
+## 2026-10-25 界面反馈与独立卡组页
+
+桌布误触已在双方基地背景复现：背景图片虽然不接收指针，旧预览查找会向父节点搜索，并把裁切范围外的整张传奇插画当成卡面。readability.js 统一排除 battlefield-background、base-legend-background 和 custom-playmat；真实传奇卡继续可读，卡背保护不变。
+
+捕获组件的 BaseZone / Battlefield 在外层 slot 绘制选框，Card 在内层 card-motion surface 旋转，因此横置时选框方向错误。selection-frames.js 将独立装饰边框附到实际旋转表面，隐藏原外框的边色/阴影，保留布局边宽、原点击、拖动与编号徽章。不改卡牌是否可选、是否横置或规则状态。
+
+个人卡组改为 AppRoot 的 personalDecks 页面，以 #my-decks 定位。首页入口加入原底部导航，进入后卸载 MainMenu；不是盖在首页上的固定弹窗。保留原本 fuxuan:personalDecks:v1 数据、增量推荐、完整副本、导入校验及备份格式。原构筑器的保存/取消回到收藏页；选用卡组返回首页。导航匹配捕获版本的 // DECKS 语义标签，不依赖生成的 CSS 类名。
+
+ai-thinking.js 订阅原 store 的 aiThinkingById，来自原宿主 aiThinking / aiDecision 消息，不用当前回合推测 AI 状态、不伪造百分比。错误、断连、结束及离开游戏时收起，装饰不接收鼠标；遵循减少动态效果偏好。未改原 AI 算法或计算时间。完整对局实测 66 个开始/停止信号，33 次开始信号均触发新提示。

@@ -15,12 +15,13 @@
     "verify": "node community/scripts/prepare-engine.mjs && node community/scripts/verify-snapshot.mjs && node community/scripts/verify-local.mjs",
     "test:browser": "node community/scripts/probe-browser.mjs && node community/scripts/probe-features.mjs",
     "test:readability": "node community/scripts/probe-readability.mjs",
+    "test:feedback": "node community/scripts/probe-board-feedback.mjs",
     "test:scoring": "node community/scripts/probe-final-point.mjs",
-    "test:decks": "node community/scripts/test-personal-deck-store.mjs && node community/scripts/probe-personal-decks.mjs",
+    "test:decks": "node community/scripts/test-personal-deck-store.mjs && node community/scripts/probe-personal-decks.mjs && node community/scripts/probe-deck-navigation.mjs",
     "community:start": "node community/scripts/prepare-engine.mjs && node community/scripts/server.mjs",
     "community:test": "node community/scripts/probe-browser.mjs && node community/scripts/probe-features.mjs",
     "community:test:readability": "node community/scripts/probe-readability.mjs",
-    "community:test:decks": "node community/scripts/test-personal-deck-store.mjs && node community/scripts/probe-personal-decks.mjs",
+    "community:test:decks": "npm run test:decks",
     "community:capture": "node community/scripts/capture.mjs",
     "community:verify": "node community/scripts/verify-snapshot.mjs && node community/scripts/verify-local.mjs"
   }
