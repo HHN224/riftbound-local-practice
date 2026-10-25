@@ -252,14 +252,42 @@
           View = __r(70).default;
         const h = React.createElement;
         function App() {
-          const [screen, setScreen] = React.useState("menu"),
+          const [screen, setScreen] = React.useState(
+              location.hash === "#my-decks" ? "personalDecks" : "menu",
+            ),
             [editId, setEditId] = React.useState(undefined),
+            [personalEditor, setPersonalEditor] = React.useState(false),
             [menuRevision, setMenuRevision] = React.useState(0),
             [sandbox, setSandbox] = React.useState(false);
           React.useEffect(() => {
+            const onHash = () =>
+              setScreen((current) =>
+                ["menu", "personalDecks"].includes(current)
+                  ? location.hash === "#my-decks"
+                    ? "personalDecks"
+                    : "menu"
+                  : current,
+              );
+            window.addEventListener("hashchange", onHash);
+            return () => window.removeEventListener("hashchange", onHash);
+          }, []);
+          React.useEffect(() => {
+            FuxuanLocal.openPersonalDecks = () => {
+              location.hash = "my-decks";
+              setScreen("personalDecks");
+            };
+            FuxuanLocal.closePersonalDecks = () => {
+              history.replaceState(
+                null,
+                "",
+                location.pathname + location.search,
+              );
+              setScreen("menu");
+            };
             FuxuanLocal.refreshMenu = () =>
               setMenuRevision((value) => value + 1);
             FuxuanLocal.editPersonalDeck = (id) => {
+              setPersonalEditor(true);
               setEditId(id);
               setScreen("deckBuilder");
             };
@@ -281,11 +309,22 @@
               sandboxMode: sandbox,
               previewMode: false,
             });
+          else if (screen === "personalDecks")
+            content = h("div", {
+              id: "personal-decks-host",
+              style: { height: "100%", minHeight: 0 },
+              ref: (element) =>
+                element && FuxuanLocal.mountPersonalDecks?.(element),
+            });
           else if (screen === "deckBuilder")
             content = h(__r(1148).DeckBuilder, {
               editDeckId: editId,
-              onCancel: back,
-              onComplete: back,
+              onCancel: personalEditor
+                ? () => setScreen("personalDecks")
+                : back,
+              onComplete: personalEditor
+                ? () => setScreen("personalDecks")
+                : back,
             });
           else if (screen === "sandbox")
             content = h(__r(1137).SandboxScreen, {
@@ -305,6 +344,7 @@
                 setScreen("game");
               },
               onOpenDeckBuilder: (id) => {
+                setPersonalEditor(false);
                 setEditId(id);
                 setScreen("deckBuilder");
               },

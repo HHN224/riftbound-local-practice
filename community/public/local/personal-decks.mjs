@@ -3,27 +3,53 @@ import {
   PERSONAL_DECK_KEY,
 } from "./personal-deck-store.mjs";
 
-const shelf = document.createElement("aside");
-shelf.className = "pd-shelf";
-shelf.hidden = true;
-shelf.innerHTML =
-  '<label>我的练牌卡组<select aria-label="快速切换个人卡组" data-testid="personal-deck-select"></select></label><button type="button" data-testid="save-current-deck">保存当前卡组</button><button type="button" class="pd-primary" data-testid="open-personal-decks">个人卡组列表</button>';
-const overlay = document.createElement("div");
-overlay.className = "pd-overlay";
-overlay.hidden = true;
-overlay.innerHTML =
-  '<section class="pd-dialog" role="dialog" aria-modal="true" aria-labelledby="pd-title"><header><div><span class="pd-eyebrow">LOCAL COLLECTION</span><h1 id="pd-title">个人卡组列表</h1><p>导入一次，保存后随时切换。卡组保存在当前浏览器。</p></div><button type="button" data-testid="close-personal-decks">关闭 · Esc</button></header><div class="pd-tools"><label>搜索卡组<input type="search" placeholder="卡组名、英雄名…" data-testid="personal-deck-search"></label><button type="button" data-testid="backup-personal-decks">导出全部备份</button></div><p class="pd-status" role="status" aria-live="polite"></p><div class="pd-body"><div class="pd-list" data-testid="personal-deck-list"></div><form class="pd-import"><h2>导入并保存卡组</h2><p>支持符玄 / Piltover Archive 卡组码，以及此处导出的 JSON 备份。网页上的卡组请先复制卡组码。</p><label>卡组名称<input name="deckName" maxlength="100" placeholder="可选，留空使用原名称"></label><label>卡组码或备份 JSON<textarea name="deckCode" required spellcheck="false" placeholder="在此粘贴卡组码或 JSON…" rows="8"></textarea></label><label class="pd-file">或读取本地文件<input type="file" accept=".json,.txt" aria-label="读取卡组文件"></label><button type="submit" class="pd-primary">导入并保存</button><p class="pd-import-status" role="alert"></p></form></div></section>';
+const entry = document.createElement("button");
+entry.type = "button";
+entry.className = "pd-nav-entry";
+entry.dataset.testid = "open-personal-decks";
+entry.innerHTML = "<span>我的卡组</span><small>// SAVED</small>";
+const pageView = document.createElement("div");
+pageView.className = "pd-page";
+pageView.hidden = true;
+pageView.innerHTML = `
+<main class="pd-layout" aria-label="个人卡组列表">
+  <header class="pd-header">
+    <div><span class="pd-eyebrow">FUXUANBOUND <b>/</b> PERSONAL COLLECTION</span><h1>我的卡组<span class="pd-total"></span></h1><p>你的构筑，你的下一场对局。</p></div>
+    <button type="button" class="pd-back" data-testid="close-personal-decks">← 返回首页 <small>ESC</small></button>
+  </header>
+  <div class="pd-current"><span class="pd-current-label">当前出战 <small>// ACTIVE DECK</small></span><strong class="pd-current-name"></strong><button type="button" data-testid="save-current-deck">＋ 保存当前卡组</button></div>
+  <div class="pd-body">
+    <section class="pd-library" aria-label="已保存的卡组">
+      <div class="pd-tools"><div><h2>已保存的卡组</h2><span class="pd-library-note">选择一套，回到首页开始练牌</span></div><label><span class="pd-sr-only">搜索卡组</span><input type="search" placeholder="搜索卡组、英雄…" data-testid="personal-deck-search"></label></div>
+      <p class="pd-status" role="status" aria-live="polite"></p>
+      <div class="pd-list" data-testid="personal-deck-list"></div>
+    </section>
+    <aside class="pd-sidebar">
+      <form class="pd-import">
+        <span class="pd-eyebrow">IMPORT / 01</span><h2>把新卡组带进来</h2>
+        <p>粘贴符玄 / Piltover Archive 卡组码，或导入个人卡组备份。</p>
+        <label>卡组名称 <small>选填</small><input name="deckName" maxlength="100" placeholder="留空使用原名称"></label>
+        <label>卡组码或 JSON<textarea name="deckCode" required spellcheck="false" placeholder="在这里粘贴卡组码…" rows="5"></textarea></label>
+        <label class="pd-file">或读取文件<input type="file" accept=".json,.txt" aria-label="读取卡组文件"></label>
+        <button type="submit" class="pd-primary">＋ 导入并保存</button>
+        <p class="pd-import-status" role="alert"></p>
+      </form>
+      <section class="pd-backup"><span class="pd-eyebrow">LOCAL / BACKUP</span><h2>让收藏跟你走</h2><p>卡组保存在当前浏览器。换电脑或浏览器前，先导出一份备份。</p><button type="button" data-testid="backup-personal-decks">↓ 导出全部备份</button></section>
+    </aside>
+  </div>
+  <footer class="pd-footer"><span>符玄战场 · 本地练牌</span><span>保存 · 构筑 · 再来一局</span></footer>
+</main>`;
 const toast = document.createElement("div");
 toast.className = "pd-toast";
 toast.hidden = true;
 toast.setAttribute("role", "status");
-document.body.append(shelf, overlay, toast);
-const select = shelf.querySelector("select"),
-  list = overlay.querySelector(".pd-list"),
-  search = overlay.querySelector('input[type="search"]'),
-  form = overlay.querySelector("form"),
-  status = overlay.querySelector(".pd-status");
-let store, upstream, catalog, byId, initialization, previousFocus, toastTimer;
+document.body.append(toast);
+const list = pageView.querySelector(".pd-list"),
+  search = pageView.querySelector('input[type="search"]'),
+  form = pageView.querySelector("form"),
+  status = pageView.querySelector(".pd-status");
+let store, upstream, catalog, byId, initialization, toastTimer;
+let returnFocus = false;
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const node = (tag, text, className) => {
   const el = document.createElement(tag);
@@ -167,22 +193,17 @@ async function ready() {
 }
 
 function currentId() {
-  return upstream.getSelectedDeckId();
+  return upstream.getSelectedDeckId() ?? upstream.listDecks()[0]?.id;
 }
 function render() {
   if (!store) return;
   const decks = store.list(),
     current = currentId();
-  select.replaceChildren();
-  const placeholder = node("option", "选择一套个人卡组…");
-  placeholder.value = "";
-  select.append(placeholder);
-  for (const deck of decks) {
-    const option = node("option", deck.name);
-    option.value = deck.id;
-    select.append(option);
-  }
-  select.value = decks.some((deck) => deck.id === current) ? current : "";
+  pageView.querySelector(".pd-total").textContent = String(
+    decks.length,
+  ).padStart(2, "0");
+  pageView.querySelector(".pd-current-name").textContent =
+    upstream.getDeck(current)?.name || "尚未选择卡组";
   const query = search.value.trim().toLocaleLowerCase();
   list.replaceChildren();
   for (const deck of decks.filter((deck) =>
@@ -192,16 +213,22 @@ function render() {
   )) {
     const card = node("article", null, "pd-deck");
     card.dataset.deckId = deck.id;
+    card.classList.toggle("pd-active", current === deck.id);
     const image = node("img");
     image.src = __r(942).cardInfoImageUrl(byId.get(deck.legendCardId));
     image.alt = deck.legendName;
     image.draggable = false;
     const info = node("div", null, "pd-deck-info");
     info.append(
+      node(
+        "span",
+        current === deck.id ? "正在使用 / ACTIVE" : deck.legendName,
+        "pd-deck-label",
+      ),
       node("h2", deck.name),
       node(
         "p",
-        `${deck.legendName} · ${deck.heroName}　主牌 40 / 符文 12 / 战场 3 / 备牌 ${deck.sideboardCardIds.length}`,
+        `${deck.heroName} · 40 主牌 / 12 符文 / 3 战场 / ${deck.sideboardCardIds.length} 备牌`,
       ),
     );
     if (deck.source) {
@@ -231,14 +258,25 @@ function render() {
     );
     action("编辑", () => {
       activate(deck);
-      close();
       FuxuanLocal.editPersonalDeck(deck.id);
     });
+    const more = node("details", null, "pd-more");
+    more.append(node("summary", "更多 ···"));
+    const menu = node("div", null, "pd-more-menu");
+    more.append(menu);
+    actions.append(more);
+    const extraStart = actions.children.length;
     action("导出", () =>
       download({ schemaVersion: 1, decks: [deck] }, deck.name + ".json"),
     );
     action("重命名", () => rename(card, deck));
     action("移出个人列表", () => remove(card, deck));
+    for (const button of [...actions.children].slice(extraStart)) {
+      button.addEventListener("click", () => {
+        more.open = false;
+      });
+      menu.append(button);
+    }
     card.append(image, info, actions);
     list.append(card);
   }
@@ -248,7 +286,7 @@ function render() {
         "p",
         decks.length
           ? "没有匹配的卡组。"
-          : "还没有个人卡组。导入卡组码，或在首页保存当前卡组。",
+          : "还没有个人卡组。导入卡组码，或使用上方的「保存当前卡组」。",
         "pd-empty",
       ),
     );
@@ -357,8 +395,8 @@ function parse(text) {
   return [result.deck];
 }
 function close() {
-  overlay.hidden = true;
-  if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
+  returnFocus = true;
+  FuxuanLocal.closePersonalDecks();
 }
 async function run(fn) {
   try {
@@ -371,31 +409,20 @@ async function run(fn) {
 }
 async function open() {
   await ready();
-  previousFocus = document.activeElement;
-  render();
-  status.textContent = "";
-  overlay.hidden = false;
-  search.focus();
+  FuxuanLocal.openPersonalDecks();
 }
-shelf.querySelector('[data-testid="open-personal-decks"]').onclick = () =>
-  run(open);
-shelf.querySelector('[data-testid="save-current-deck"]').onclick = () =>
+entry.onclick = () => run(open);
+pageView.querySelector('[data-testid="save-current-deck"]').onclick = () =>
   run(() => {
     const deck = upstream.getDeck(currentId());
     if (!deck) throw Error("请先在对战页选择一套卡组。");
     store.save(clone(deck));
     render();
-    notify("已保存到个人卡组：" + deck.name);
+    status.textContent = "已保存到个人卡组：" + deck.name;
   });
-select.onchange = () => {
-  if (select.value) run(() => useDeck(select.value));
-};
-overlay.querySelector('[data-testid="close-personal-decks"]').onclick = close;
-overlay.querySelector('[data-testid="backup-personal-decks"]').onclick = () =>
+pageView.querySelector('[data-testid="close-personal-decks"]').onclick = close;
+pageView.querySelector('[data-testid="backup-personal-decks"]').onclick = () =>
   run(() => download(store.backup(), "符玄战场-个人卡组备份.json"));
-overlay.onclick = (event) => {
-  if (event.target === overlay) close();
-};
 search.oninput = () => run(render);
 form.querySelector('input[type="file"]').onchange = async (event) => {
   const file = event.target.files[0];
@@ -418,7 +445,7 @@ form.onsubmit = async (event) => {
       decks[0].name = form.elements.deckName.value.trim();
     const saved = store.saveMany(decks);
     render();
-    error.textContent = `已保存 ${new Set(saved.map((d) => d.id)).size} 套卡组，可在左侧点击使用。`;
+    error.textContent = `已保存 ${new Set(saved.map((d) => d.id)).size} 套卡组，可在列表中点击使用。`;
     form.elements.deckCode.value = "";
     form.elements.deckName.value = "";
   } catch (e) {
@@ -430,28 +457,18 @@ document.addEventListener(
   (event) => {
     if (
       event.defaultPrevented ||
-      overlay.hidden ||
+      pageView.hidden ||
       document.querySelector(".fx-modal:not([hidden])")
     )
       return;
     event.stopPropagation();
     if (event.key === "Escape") {
       event.preventDefault();
-      close();
-    } else if (event.key === "Tab") {
-      const focusable = [
-        ...overlay.querySelectorAll("button,input,select,textarea,a[href]"),
-      ].filter((el) => !el.disabled && el.getClientRects().length);
-      if (event.shiftKey && document.activeElement === focusable[0]) {
-        event.preventDefault();
-        focusable.at(-1).focus();
-      } else if (
-        !event.shiftKey &&
-        document.activeElement === focusable.at(-1)
-      ) {
-        event.preventDefault();
-        focusable[0].focus();
-      }
+      const menu = pageView.querySelector("details[open]");
+      if (menu) {
+        menu.open = false;
+        menu.querySelector("summary").focus();
+      } else close();
     }
   },
   true,
@@ -463,10 +480,45 @@ window.addEventListener("storage", (event) => {
   )
     run(render);
 });
+function attachEntry() {
+  if (FuxuanLocal.screen !== "menu" || entry.isConnected) return;
+  // Match a semantic label from the pinned menu, never generated CSS classes.
+  const decks = [...document.querySelectorAll('#root [role="button"]')].find(
+    (el) => el.textContent.includes("// DECKS"),
+  );
+  const bar = decks?.parentElement?.parentElement;
+  if (bar) {
+    bar.classList.add("pd-menu-nav");
+    bar.append(entry);
+    if (returnFocus) {
+      returnFocus = false;
+      entry.focus({ preventScroll: true });
+    }
+  }
+}
+let menuScheduled = false;
+new MutationObserver(() => {
+  if (menuScheduled || FuxuanLocal.screen !== "menu") return;
+  menuScheduled = true;
+  requestAnimationFrame(() => {
+    menuScheduled = false;
+    attachEntry();
+  });
+}).observe(document.getElementById("root"), { childList: true, subtree: true });
+FuxuanLocal.mountPersonalDecks = (host) => host.append(pageView);
 function screenChanged() {
-  shelf.hidden = FuxuanLocal.screen !== "menu";
-  if (shelf.hidden) close();
-  else run(render);
+  pageView.hidden = FuxuanLocal.screen !== "personalDecks";
+  if (!pageView.hidden) {
+    const host = document.getElementById("personal-decks-host");
+    if (host && pageView.parentElement !== host) host.append(pageView);
+    run(() => {
+      render();
+      pageView.querySelector(".pd-back").focus({ preventScroll: true });
+    });
+  } else if (FuxuanLocal.screen === "menu") {
+    attachEntry();
+    run(render);
+  }
 }
 document.addEventListener("fuxuan:screen", screenChanged);
 if (FuxuanLocal.screen) screenChanged();

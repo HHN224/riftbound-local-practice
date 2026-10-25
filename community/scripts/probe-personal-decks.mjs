@@ -34,14 +34,29 @@ page.on("pageerror", (e) => errors.push(e.stack));
 page.on("response", (r) => {
   if (r.status() >= 400) failed.push([r.status(), r.url()]);
 });
-const shelf = page.getByTestId("personal-deck-select"),
-  open = () => page.getByTestId("open-personal-decks").click();
+const deckPage = page.getByRole("main", { name: "个人卡组列表" });
+const open = async () => {
+  if (!(await deckPage.isVisible()))
+    await page.getByTestId("open-personal-decks").click();
+  await deckPage.waitFor();
+};
+const selected = () =>
+  page.evaluate(() => __r(841).deckStore.getSelectedDeckId());
+const choose = async (id) => {
+  await open();
+  await page.getByTestId("personal-deck-search").fill("");
+  await page
+    .locator(`[data-deck-id="${id}"]`)
+    .getByRole("button", { name: /^(使用这套卡组|当前使用)$/ })
+    .click();
+  await page.getByTestId("open-personal-decks").waitFor();
+};
 const personal = () =>
   page.evaluate(() => FuxuanLocal.personalDecks.store.list());
 const count = async () => (await personal()).length;
 const codeInput = page.locator(".pd-import textarea");
 const submit = () =>
-  page.getByRole("button", { name: "导入并保存", exact: true }).click();
+  page.getByRole("button", { name: "＋ 导入并保存", exact: true }).click();
 try {
   await page.goto(origin + "/fuxuan/");
   await page.waitForFunction(() => !!globalThis.FuxuanLocal?.personalDecks);
@@ -58,18 +73,20 @@ try {
   await art.click({ button: "right" });
   await page.locator(".fx-modal:not([hidden])").waitFor();
   await page.keyboard.press("Escape");
-  assert(await page.getByRole("dialog", { name: "个人卡组列表" }).isVisible());
+  assert(await page.getByRole("main", { name: "个人卡组列表" }).isVisible());
   await page.screenshot({
     path: "community/test-results/personal-decks-1366.png",
   });
   const ornn = page.locator('[data-deck-id="personal-ornn-la-2026"]');
   await ornn.getByRole("button", { name: "使用这套卡组", exact: true }).click();
-  assert.equal(await shelf.inputValue(), "personal-ornn-la-2026");
+  assert.equal(await selected(), "personal-ornn-la-2026");
+  await open();
   await page.getByTestId("save-current-deck").click();
+  await page.getByTestId("close-personal-decks").click();
   assert.equal(await count(), seedCount);
   await page.reload();
   await page.waitForFunction(() => !!FuxuanLocal.personalDecks);
-  assert.equal(await shelf.inputValue(), "personal-ornn-la-2026");
+  assert.equal(await selected(), "personal-ornn-la-2026");
   // Round trip the author's native deck code, including all sideboard copies.
   const code = await page.evaluate(() =>
     __r(1327).exportDeckToCode(
@@ -137,6 +154,7 @@ try {
     (await page.locator(".pd-import-status").innerText()).includes("找不到"),
   );
   const row = page.locator('[data-deck-id="personal-ornn-la-2026"]');
+  await row.locator("summary").click();
   await row.getByRole("button", { name: "重命名", exact: true }).click();
   await row.getByLabel("新的卡组名称").fill("我的装备奥恩");
   await row.getByRole("button", { name: "保存名称", exact: true }).click();
@@ -150,15 +168,16 @@ try {
   await row.getByRole("button", { name: "编辑", exact: true }).click();
   await page.getByText("保存卡组", { exact: true }).waitFor();
   await page.waitForTimeout(600);
-  assert.equal(await page.locator(".pd-shelf").isVisible(), false);
+  assert.equal(await deckPage.isVisible(), false);
   await page.getByText("保存卡组", { exact: true }).click();
-  await page.waitForFunction(() => FuxuanLocal.screen === "menu");
+  await page.waitForFunction(() => FuxuanLocal.screen === "personalDecks");
   assert.equal(
     (await personal()).find((d) => d.id === "personal-ornn-la-2026").name,
     "我的装备奥恩",
   );
   await open();
   const nasus = page.locator('[data-deck-id="personal-nasus-la-2026"]');
+  await nasus.locator("summary").click();
   await nasus.getByRole("button", { name: "移出个人列表" }).click();
   await nasus.getByRole("button", { name: "确认移出" }).click();
   assert.equal(await count(), seedCount);
@@ -177,7 +196,7 @@ try {
   assert(
     (await personal()).some((deck) => deck.id === "personal-ornn-la-2026"),
   );
-  await shelf.selectOption("personal-ornn-la-2026");
+  await choose("personal-ornn-la-2026");
   assert(
     await page.evaluate(
       () => !!__r(841).deckStore.getDeck("personal-ornn-la-2026"),
@@ -190,9 +209,9 @@ try {
     const d = (await personal()).find(
       (d) => d.heroName === recommendation.heroName,
     );
-    await shelf.selectOption(d.id);
+    await choose(d.id);
     await page.getByText("人机对战 // VS AI", { exact: true }).click();
-    assert.equal(await page.locator(".pd-shelf").isVisible(), false);
+    assert.equal(await deckPage.isVisible(), false);
     let state;
     for (let n = 0; n < 100; n++) {
       state = await page.evaluate(() => {
