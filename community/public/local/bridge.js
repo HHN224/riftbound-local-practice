@@ -164,6 +164,63 @@
         };
       };
     }
+    if (id === 1079) {
+      const original = factory;
+      factory = function (...args) {
+        original(...args);
+        const exports = args[5],
+          Stack = exports.ResolutionStack,
+          React = __r(4);
+        const flatten = (styles) =>
+          Object.assign({}, ...[styles].flat(Infinity).filter(Boolean));
+        function orientFrames(element) {
+          if (!React.isValidElement(element) || !element.props.children)
+            return element;
+          let children = React.Children.toArray(element.props.children);
+          // This captured entry owns one card/echo group plus its source-color
+          // outline. Change the outline's footprint only; TOP/NEXT, hit areas,
+          // entry motion and echo offsets retain the author's layout.
+          const group = children.find(
+            (child) => child?.props?.card && child.props.metrics,
+          );
+          if (group) {
+            const { card, metrics, chainId } = group.props;
+            const sideways =
+              Math.abs(__r(950).getCardDisplayRotation(card)) % 180 === 90;
+            const inset = sideways
+              ? (metrics.cardWidth - metrics.cardHeight) / 2
+              : 0;
+            children = children.map((child) => {
+              const style = flatten(child?.props?.style);
+              if (
+                style.position !== "absolute" ||
+                style.zIndex !== 40 ||
+                !style.borderWidth ||
+                !["top", "right", "bottom", "left"].every(
+                  (key) => style[key] === 0,
+                )
+              )
+                return child;
+              return React.cloneElement(child, {
+                testID: "local-resolution-card-frame:" + chainId,
+                style: [
+                  child.props.style,
+                  { left: inset, right: inset, top: -inset, bottom: -inset },
+                ],
+              });
+            });
+          }
+          return React.cloneElement(
+            element,
+            undefined,
+            children.map(orientFrames),
+          );
+        }
+        exports.ResolutionStack = function LocalResolutionStack(props) {
+          return orientFrames(Stack(props));
+        };
+      };
+    }
     if (id === 1043) {
       const original = factory;
       factory = function (...args) {

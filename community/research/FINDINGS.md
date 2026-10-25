@@ -130,3 +130,11 @@ PLAY-GUIDE.md 按这三套的实际主牌说明起手、资源、关键配合与
 个人卡组改为 AppRoot 的 personalDecks 页面，以 #my-decks 定位。首页入口加入原底部导航，进入后卸载 MainMenu；不是盖在首页上的固定弹窗。保留原本 fuxuan:personalDecks:v1 数据、增量推荐、完整副本、导入校验及备份格式。原构筑器的保存/取消回到收藏页；选用卡组返回首页。导航匹配捕获版本的 // DECKS 语义标签，不依赖生成的 CSS 类名。
 
 ai-thinking.js 订阅原 store 的 aiThinkingById，来自原宿主 aiThinking / aiDecision 消息，不用当前回合推测 AI 状态、不伪造百分比。错误、断连、结束及离开游戏时收起，装饰不接收鼠标；遵循减少动态效果偏好。未改原 AI 算法或计算时间。完整对局实测 66 个开始/停止信号，33 次开始信号均触发新提示。
+
+## 2026-10-25 结算区来源框与战力飘字补修
+
+用户补充截图明确指出 ResolutionStack 的蓝色来源框；它不是此前修复的 BaseZone / Battlefield 目标选择框。独立呈现复现中，战场卡图的实际矩形为 135×97，来源框仍为 97×135。原模块 1079 的 entryFrame 与 Card 分别绘制，来源框没有采用模块 950 的卡牌方向。
+
+bridge.js 包装原 ResolutionStack，按卡图方向与原 metrics 调整 entryFrame 四边偏移。保留来源颜色、TOP/NEXT 编号、点击区和入场动画；回响组仅扩展旋转产生的外沿，沿用原回响水平间距。没有改写捕获组件，也不依赖生成的 DOM 类名。此前的 selection-frames.js 继续处理战场目标框，两种边框分别验证。
+
+原模块 993 在 power-modified 提示中拼接实际 amount 与字符 S，1/2/15/-2 分别生成 +1S/+2S/+15S/-2S。并非固定默认值 15，S 在小尺寸动效中容易被看作 5。原 APK 的「实战经验」和「训练有素」实际将单位战力由 5 提升至 6、再至 8，并发出 amount=1/2、nextPower=6/8 的提示。仅在浮字发布模块 994 将 buff/debuff 的数字 S 后缀改为「 战力」，保留数值、正负号与动画。伤害、得分、其他提示不做此转换。

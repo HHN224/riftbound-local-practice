@@ -16,6 +16,7 @@
     "test:browser": "node community/scripts/probe-browser.mjs && node community/scripts/probe-features.mjs",
     "test:readability": "node community/scripts/probe-readability.mjs",
     "test:feedback": "node community/scripts/probe-board-feedback.mjs",
+    "test:resolution": "node community/scripts/probe-resolution-ui.mjs && node community/scripts/probe-power-spells.mjs",
     "test:scoring": "node community/scripts/probe-final-point.mjs",
     "test:decks": "node community/scripts/test-personal-deck-store.mjs && node community/scripts/probe-personal-decks.mjs && node community/scripts/probe-deck-navigation.mjs",
     "community:start": "node community/scripts/prepare-engine.mjs && node community/scripts/server.mjs",
