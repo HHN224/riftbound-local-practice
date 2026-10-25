@@ -1,0 +1,14 @@
+.fx-selection-slot {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+.fx-selection-frame {
+  position: absolute;
+  inset: -2px;
+  border: 2px solid var(--fx-selection-color);
+  border-radius: 6px;
+  box-shadow: 0 0 16px
+    color-mix(in srgb, var(--fx-selection-color) 60%, transparent);
+  pointer-events: none;
+  z-index: 30;
+}

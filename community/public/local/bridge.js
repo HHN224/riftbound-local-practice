@@ -119,6 +119,15 @@
   }
   const transport = new LocalTransport();
   globalThis.FuxuanLocal = { transport };
+  for (const [tag, attribute, path] of [
+    ["link", "href", "/local/selection-frames.css"],
+    ["script", "src", "/local/selection-frames.js"],
+  ]) {
+    const element = document.createElement(tag);
+    if (tag === "link") element.rel = "stylesheet";
+    element[attribute] = path;
+    document.head.append(element);
+  }
   // Optional presentation layer: loading it never delays the original engine.
   const readabilityStyle = document.createElement("link");
   readabilityStyle.rel = "stylesheet";

@@ -20,7 +20,8 @@
     previousFocus,
     catalog;
   const fieldData = new WeakMap();
-  const decorativeArt = '[data-testid^="battlefield-background:"], [data-testid^="base-legend-background:"], [data-testid="custom-playmat"]';
+  const decorativeArt =
+    '[data-testid^="battlefield-background:"], [data-testid^="base-legend-background:"], [data-testid="custom-playmat"]';
   const state = () => globalThis.__r?.(841).useGameStore.getState();
   const clean = (text) => String(text || "").replace(/\{\{(.*?)\}\}/g, "$1");
   function textElement(tag, text, className) {
