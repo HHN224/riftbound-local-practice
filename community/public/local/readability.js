@@ -20,6 +20,7 @@
     previousFocus,
     catalog;
   const fieldData = new WeakMap();
+  const decorativeArt = '[data-testid^="battlefield-background:"], [data-testid^="base-legend-background:"], [data-testid="custom-playmat"]';
   const state = () => globalThis.__r?.(841).useGameStore.getState();
   const clean = (text) => String(text || "").replace(/\{\{(.*?)\}\}/g, "$1");
   function textElement(tag, text, className) {
@@ -74,7 +75,7 @@
     let node = face || event.target;
     for (let depth = 0; node && depth < 5; depth++, node = node.parentElement) {
       if (node === document.body || node.id === "root") break;
-      if (node.closest('[data-testid^="battlefield-background:"]')) return null;
+      if (node.closest(decorativeArt)) return null;
       const images = [
         ...node.querySelectorAll(
           'img[src*="/card-images/"], img[src*="/cardbacks/"]',
@@ -82,7 +83,7 @@
       ];
       if (node.matches("img")) images.unshift(node);
       for (const img of images) {
-        if (img.closest('[data-testid^="battlefield-background:"]')) continue;
+        if (img.closest(decorativeArt)) continue;
         const rect = img.getBoundingClientRect();
         if (
           event.clientX < rect.left ||
