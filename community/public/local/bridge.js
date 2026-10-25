@@ -148,6 +148,22 @@
   document.head.append(personalScript);
   const register = globalThis.__d;
   globalThis.__d = function (factory, id, deps) {
+    if (id === 994) {
+      const original = factory;
+      factory = function (...args) {
+        original(...args);
+        const exports = args[5],
+          push = exports.pushFloat;
+        exports.pushFloat = (item) => {
+          // The original power cue already carries the real delta. Its "S"
+          // suffix looks like 5 at speed; spell it out without changing values.
+          const power =
+            ["buff", "debuff"].includes(item.kind) &&
+            /^([+-]?\d+(?:\.\d+)?)S$/.exec(item.text);
+          return push(power ? { ...item, text: power[1] + " 战力" } : item);
+        };
+      };
+    }
     if (id === 1043) {
       const original = factory;
       factory = function (...args) {
