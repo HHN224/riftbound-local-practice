@@ -11,6 +11,8 @@
   },
   "scripts": {
     "start": "node community/scripts/prepare-engine.mjs && node community/scripts/server.mjs",
+    "build:desktop": "powershell -NoProfile -ExecutionPolicy Bypass -File community/desktop/Build.ps1",
+    "test:desktop": "node community/scripts/probe-desktop.mjs",
     "test": "node community/scripts/test-personal-deck-store.mjs",
     "verify": "node community/scripts/prepare-engine.mjs && node community/scripts/verify-snapshot.mjs && node community/scripts/verify-local.mjs",
     "test:browser": "node community/scripts/probe-browser.mjs && node community/scripts/probe-features.mjs",

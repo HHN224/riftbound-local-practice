@@ -1,6 +1,7 @@
 **/node_modules/
 **/runtime/
 **/test-results/
+/dist/
 *.log
 community/tools/
 community/research/*.readable.js
