@@ -4,6 +4,7 @@
 
 ## 启动
 
+- **免安装 EXE**：从 GitHub Releases 下载 `riftbound-local-practice-win-x64.exe`，双击即可启动并打开系统浏览器。支持 Windows x64，内置 Node.js 和原 Hermes 规则宿主，无需另行安装依赖。首次运行释放到 `%LOCALAPPDATA%/RiftboundLocalPractice/releases/`；之后重复运行复用本地服务。
 - **符玄本地网页版**：双击根目录 `启动符玄战场.cmd`，访问 http://127.0.0.1:4174/fuxuan/，点「人机对战 // VS AI」。支持原界面的卡组选择、构筑、难度设置及 Sandbox 场景练习。
 
 本机已具备 Node.js 和 Windows x64 运行程序。符玄网页版启动后台本地服务，无需模拟器或远程规则服务器。网页必须通过启动器/本地地址打开，不能双击 HTML 文件。关闭启动器窗口不会关闭服务。

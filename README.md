@@ -4,6 +4,8 @@
 
 ## 启动
 
+普通玩家可从 [GitHub Releases](https://github.com/HHN224/riftbound-local-practice/releases/latest) 下载 `riftbound-local-practice-win-x64.exe`，双击即可运行，无需安装 Node.js 或克隆仓库。首次运行释放文件到用户目录，然后打开系统浏览器；不需要管理员权限。详细打包方式见 [桌面发布说明](community/desktop/README.md)。
+
 目前支持 **Windows x64、Node.js 20 或更新版本**。克隆仓库后双击 `启动符玄战场.cmd`，或在仓库根目录运行：
 
 ```powershell

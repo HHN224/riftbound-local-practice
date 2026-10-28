@@ -144,3 +144,11 @@ bridge.js 包装原 ResolutionStack，按卡图方向与原 metrics 调整 entry
 新增沙皇（MICE Squirtle，洛杉矶第 3）、狮子狗（DSG Prismaticism，洛杉矶第 1）与薇古丝（XXT.tqw，成都全国赛第 2）。前两套来自 Riot 官方完整牌表；薇古丝的主备由 Mobalytics 与 Runes & Rift 交叉确认，符文和战场取 Mobalytics 完整构筑。三套均为第四弹环境，不宣传为第五弹最新强度结论。具体链接、卡号和张数见 RECOMMENDED-DECKS.md。
 
 仍使用原 personalDecks 存储与增量 seeded 机制；原五套推荐逐对象对照未改变。卡组导航测试从固定五套改为按推荐数据数量检查，并为三个请求英雄加入独立传奇/英雄 ID 断言，避免误取“主牌里含有该英雄”的其他赛事套牌。
+
+## 2026-10-28 Windows 单文件 EXE
+
+新增独立 C#/.NET Framework 启动器与 PowerShell 构建脚本：将当前网页、1535 项资源、原 Hermes 宿主、隔离规则副本、经官方 SHA-256 校验的 Node.js 24.15.0 和微软签名的 release VC143 CRT 打入 ZIP 资源，编译为 Windows x64 单文件 EXE。首次启动释放到用户目录的内容哈希子目录，使用互斥锁与完成标记处理并发/中断；之后复用已释放文件。与原启动器一样使用系统浏览器和 4174 端口，原有健康服务继续使用，不接管正在进行的对局。
+
+构建与成品在忽略的 dist/，不进入 Git 对象历史。只将当前 community 运行文件打包，不含 original、旧 Git 数据、APK 安装包或开发依赖。打包收集通过 UTF-8 解码 Git 文件清单并关闭路径引用，避免带 · 的卡图漏打；启动器在版本目录内释放，避免 Windows 扫描文件时重命名整个目录失败。成品通过 GitHub Releases 发布，并附 SHA256SUMS。
+
+源码不存在 commandcode.ai 或 chat/completions 调用。用户提交的 429 内容明确是该外部服务的套餐 5 小时额度耗尽，与仓库大小和原 APK 本地 AI 无关；打包不依赖该接口。
