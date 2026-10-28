@@ -9,6 +9,17 @@ const recommendedDecks = JSON.parse(
   ),
 ).decks;
 const seedCount = recommendedDecks.length;
+// Independent champion IDs catch accidentally extracting another table that
+// merely mentions the requested champion among its main-deck cards.
+for (const [id, legend, hero] of [
+  ["personal-azir-la-2026", "SFD·197/221", "SFD·177/221"],
+  ["personal-rengar-la-2026", "UNL-183/219", "UNL-120/219"],
+  ["personal-vex-chengdu-2026", "UNL-193/219", "UNL-150/219"],
+]) {
+  const deck = recommendedDecks.find((d) => d.id === id);
+  assert.equal(deck?.legendCardId, legend);
+  assert.equal(deck?.heroCardId, hero);
+}
 const browser = await chromium.launch({ channel: "msedge", headless: true });
 const context = await browser.newContext({
   viewport: { width: 1366, height: 768 },

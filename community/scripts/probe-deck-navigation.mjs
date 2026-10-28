@@ -1,5 +1,12 @@
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
+import fs from "node:fs/promises";
+const recommendationCount = JSON.parse(
+  await fs.readFile(
+    new URL("../public/local/recommended-decks.json", import.meta.url),
+    "utf8",
+  ),
+).decks.length;
 const origin = "http://127.0.0.1:" + (process.env.FUXUAN_PORT || 4174);
 const browser = await chromium.launch({ channel: "msedge", headless: true });
 try {
@@ -74,7 +81,7 @@ try {
     await page.reload();
     await main.waitFor();
     await page.waitForFunction(() => !!FuxuanLocal.personalDecks);
-    assert.equal(await page.locator(".pd-deck").count(), 5);
+    assert.equal(await page.locator(".pd-deck").count(), recommendationCount);
     await page.getByTestId("personal-deck-search").fill("没有这套卡组");
     assert.equal(await page.locator(".pd-deck").count(), 0);
     assert(await page.locator(".pd-empty").isVisible());

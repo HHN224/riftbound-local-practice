@@ -138,3 +138,9 @@ ai-thinking.js 订阅原 store 的 aiThinkingById，来自原宿主 aiThinking /
 bridge.js 包装原 ResolutionStack，按卡图方向与原 metrics 调整 entryFrame 四边偏移。保留来源颜色、TOP/NEXT 编号、点击区和入场动画；回响组仅扩展旋转产生的外沿，沿用原回响水平间距。没有改写捕获组件，也不依赖生成的 DOM 类名。此前的 selection-frames.js 继续处理战场目标框，两种边框分别验证。
 
 原模块 993 在 power-modified 提示中拼接实际 amount 与字符 S，1/2/15/-2 分别生成 +1S/+2S/+15S/-2S。并非固定默认值 15，S 在小尺寸动效中容易被看作 5。原 APK 的「实战经验」和「训练有素」实际将单位战力由 5 提升至 6、再至 8，并发出 amount=1/2、nextPower=6/8 的提示。仅在浮字发布模块 994 将 buff/debuff 的数字 S 后缀改为「 战力」，保留数值、正负号与动画。伤害、得分、其他提示不做此转换。
+
+## 2026-10-28 三套赛事卡组增量导入
+
+新增沙皇（MICE Squirtle，洛杉矶第 3）、狮子狗（DSG Prismaticism，洛杉矶第 1）与薇古丝（XXT.tqw，成都全国赛第 2）。前两套来自 Riot 官方完整牌表；薇古丝的主备由 Mobalytics 与 Runes & Rift 交叉确认，符文和战场取 Mobalytics 完整构筑。三套均为第四弹环境，不宣传为第五弹最新强度结论。具体链接、卡号和张数见 RECOMMENDED-DECKS.md。
+
+仍使用原 personalDecks 存储与增量 seeded 机制；原五套推荐逐对象对照未改变。卡组导航测试从固定五套改为按推荐数据数量检查，并为三个请求英雄加入独立传奇/英雄 ID 断言，避免误取“主牌里含有该英雄”的其他赛事套牌。

@@ -25,3 +25,17 @@
 验证范围：全部本地卡号存在；套牌数量与作者重复张数/副传奇检查通过；五套均可通过人机赛前流程进入原规则宿主的行动阶段。未逐张验证全部配合，也不是与 Android 原生端同种子对照的等价性证明。
 
 首次加载个人列表时，在当前浏览器中各导入一次。用户之后编辑、重命名、移出列表或刷新时，不会被初始推荐数据覆盖或重新加回。用户修改构筑后，以用户保存的副本为准。
+
+## 2026-10-28 沙皇、薇古丝与狮子狗
+
+| 个人列表名称 | 选手与实际成绩 | 传奇 / 英雄 | 符文 |
+| --- | --- | --- | --- |
+| 沙皇 · 洛杉矶季军 | MICE Squirtle，2026 洛杉矶区域资格赛，总排名第 3 | 沙漠皇帝 `SFD·197/221` / 阿兹尔 `SFD·177/221` | 翠意 7 / 序理 5 |
+| 狮子狗 · 洛杉矶冠军 | DSG Prismaticism，同场总排名第 1 | 傲之追猎者 `UNL-183/219` / 雷恩加尔 `UNL-120/219` | 摧破 8 / 炽烈 4 |
+| 薇古丝 · 成都全国赛亚军 | XXT.tqw，2026-10-09～11 成都全国公开赛，1835 人，总排名第 2 | 愁云使者 `UNL-193/219` / 薇古丝 `UNL-150/219` | 翠意 5 / 混沌 7 |
+
+沙皇与狮子狗使用 [Riot 官方洛杉矶卡表](https://playriftbound.com/en-us/news/organizedplay/los-angeles-top-decks/)，读取日期 2026-10-28，保留完整主备，不以只在主牌中出现该英雄的其他套牌替代。
+
+薇古丝使用 [Mobalytics 的成都亚军完整卡表](https://mobalytics.gg/riftbound/decks/vex-gloomist-s4-chengdu-national-open-2nd-xxt-tqw)，以 [赛事总览](https://mobalytics.gg/riftbound/tournaments/s4-chengdu-national-open) 和 [Runes & Rift 的成都八强卡表](https://runesandrift.com/chengdu-national-open-top-8-decklists/) 交叉确认选手、名次与主备数量。Mobalytics 保留 5 翠意 / 7 混沌与三张战场：Forbidding Waste、Fortified Position、Startipped Peak；Runes & Rift 的正文没有列出符文和战场，未自行猜测这些字段。薇古丝主牌区显示两行各 1 张 Apathetic，其中第一张为选定英雄，另一张保留在其余 39 张主牌中。共 40 张主牌，不额外多加英雄。
+
+三套均为第四弹 Vendetta 环境的已出成绩赛事构筑，不标为第五弹 Radiance 最新环境最强。卡号按已有英文 Riftcodex 数据快照的普通版对应本地卡池；所有卡图、规则与 AI 继续使用现有 APK 版本。加入三套不会覆盖已有五套推荐或用户的编辑；已有浏览器结束当前局后刷新，即可由增量导入机制加入“我的卡组”。
