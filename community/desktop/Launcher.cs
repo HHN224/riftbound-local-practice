@@ -9,6 +9,8 @@ using System.Windows.Forms;
 
 internal static class Launcher {
     private const string Build = "PAYLOAD_ID";
+    private const string PolicyVersion = "BANLIST_VERSION";
+    private static bool CurrentPolicy;
     [STAThread] private static int Main(string[] args) {
         try {
             bool noBrowser = Array.IndexOf(args, "--no-browser") >= 0;
@@ -47,6 +49,16 @@ internal static class Launcher {
             int number;
             if (!Int32.TryParse(port, out number) || number < 1024 || number > 65535) throw new Exception("FUXUAN_PORT must be between 1024 and 65535.");
             string url = "http://127.0.0.1:" + port;
+            if (Healthy(url) && !CurrentPolicy) {
+                if (noBrowser || MessageBox.Show("旧版练牌服务仍在运行。请先结束当前对局，再选择“是”重启服务并应用禁卡更新。\n现在重启会结束正在进行的对局。", "符玄战场 · 更新服务", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                    throw new Exception("请结束当前对局后关闭旧服务，再运行新版。");
+                string script = "$p=Get-NetTCPConnection -LocalPort " + port + " -State Listen -ErrorAction SilentlyContinue; if($p){$w=Get-CimInstance Win32_Process -Filter ('ProcessId = '+$p.OwningProcess); if($w.CommandLine -match 'community[/\\\\]scripts[/\\\\]server\\.mjs'){Stop-Process -Id $w.ProcessId}}";
+                string encoded=Convert.ToBase64String(System.Text.Encoding.Unicode.GetBytes(script));
+                var stop = new ProcessStartInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System),"WindowsPowerShell\\v1.0\\powershell.exe"),"-NoProfile -NonInteractive -EncodedCommand "+encoded);
+                stop.UseShellExecute=false;stop.CreateNoWindow=true;
+                using (var process=Process.Start(stop)) { if(!process.WaitForExit(15000)) throw new Exception("旧服务停止超时。"); }
+                if(Healthy(url)) throw new Exception("未能停止旧服务，请手动关闭旧版后台服务后重试。");
+            }
             if (!Healthy(url)) {
                 var start = new ProcessStartInfo(Path.Combine(folder,"node.exe"), "\"" + Path.Combine(folder,"community","scripts","server.mjs") + "\"");
                 start.WorkingDirectory = folder;
@@ -78,7 +90,11 @@ internal static class Launcher {
             request.Proxy = null;
             using (var response = request.GetResponse())
             using (var reader = new StreamReader(response.GetResponseStream()))
-                return reader.ReadToEnd().Contains("Fuxuan APK local Hermes engine");
+            {
+                string body=reader.ReadToEnd();
+                CurrentPolicy=body.Contains("\"banlistVersion\":\""+PolicyVersion+"\"");
+                return body.Contains("Fuxuan APK local Hermes engine");
+            }
         } catch { return false; }
     }
 }

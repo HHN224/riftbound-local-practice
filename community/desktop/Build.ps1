@@ -78,7 +78,8 @@ $taskZip = Join-Path $taskWork 'payload.zip'
 [IO.Compression.ZipFile]::CreateFromDirectory($taskPayload,$taskZip,[IO.Compression.CompressionLevel]::Optimal,$false)
 $taskId = (Get-FileHash -LiteralPath $taskZip -Algorithm SHA256).Hash.ToLowerInvariant().Substring(0,16)
 $taskSource = Join-Path $taskWork 'Launcher.cs'
-(Get-Content -LiteralPath (Join-Path $PSScriptRoot 'Launcher.cs') -Raw -Encoding UTF8).Replace('PAYLOAD_ID',$taskId) |
+$taskBanVersion=(Get-Content -LiteralPath (Join-Path $taskRoot 'community/public/local/banlist.json') -Raw -Encoding UTF8 | ConvertFrom-Json).checked
+(Get-Content -LiteralPath (Join-Path $PSScriptRoot 'Launcher.cs') -Raw -Encoding UTF8).Replace('PAYLOAD_ID',$taskId).Replace('BANLIST_VERSION',$taskBanVersion) |
     Set-Content -LiteralPath $taskSource -Encoding UTF8
 $taskCompiler = Join-Path $env:WINDIR 'Microsoft.NET/Framework64/v4.0.30319/csc.exe'
 $taskExe = Join-Path $taskOutput 'riftbound-local-practice-win-x64.exe'
