@@ -198,3 +198,24 @@
     padding: 6px 8px;
   }
 }
+.fx-ban-warning,
+.pd-page .pd-ban-warning {
+  color: #ff9aa9;
+  font-weight: 700;
+}
+.fx-banned-card::after,
+.fx-banned-art::after {
+  content: "标准构筑禁用";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 70;
+  background: #a50020e8;
+  color: white;
+  text-align: center;
+  font:
+    700 12px/1.8 "Microsoft YaHei",
+    sans-serif;
+  pointer-events: none;
+}

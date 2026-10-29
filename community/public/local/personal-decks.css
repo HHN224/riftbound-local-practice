@@ -544,3 +544,14 @@
     transition: none;
   }
 }
+.pd-page .pd-legality-summary {
+  color: #e8bcc3;
+  margin: 0 0 16px;
+}
+.pd-page .pd-ban-warning {
+  color: #ff9aa9;
+}
+.pd-page button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

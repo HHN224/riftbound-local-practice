@@ -1,0 +1,69 @@
+{
+  "format": "Standard Constructed 1v1",
+  "effective": "2026-09-18",
+  "checked": "2026-10-29",
+  "source": "https://playriftbound.com/en-us/rules-hub/",
+  "announcement": "https://playriftbound.com/en-us/news/announcements/september-ban-list-updates-effective-september-18-2026/",
+  "cards": [
+    {
+      "name": "Called Shot",
+      "nameZh": "预判攻势",
+      "templateKeys": ["SFD:122"]
+    },
+    {
+      "name": "Ekko, Recurrent",
+      "nameZh": "艾克",
+      "templateKeys": ["OGN:110"]
+    },
+    {
+      "name": "Draven, Vanquisher",
+      "nameZh": "德莱文",
+      "templateKeys": ["SFD:20"]
+    },
+    {
+      "name": "Fight or Flight",
+      "nameZh": "战或逃",
+      "templateKeys": ["OGN:168"]
+    },
+    {
+      "name": "Scrapheap",
+      "nameZh": "废料堆",
+      "templateKeys": ["OGN:182"]
+    },
+    {
+      "name": "Stealthy Pursuer",
+      "nameZh": "隐秘追踪者",
+      "templateKeys": ["OGN:177", "OPP:177"]
+    },
+    {
+      "name": "Stacked Deck",
+      "nameZh": "卡牌骗术",
+      "templateKeys": ["OGN:183", "OPP:183"]
+    },
+    {
+      "name": "The Arena’s Greatest",
+      "nameZh": "荣耀竞技场",
+      "templateKeys": ["OGN:290"]
+    },
+    {
+      "name": "Aspirant’s Climb",
+      "nameZh": "攀圣长阶",
+      "templateKeys": ["OGN:276", "PR:276"]
+    },
+    {
+      "name": "Dreaming Tree",
+      "nameZh": "幻梦之树",
+      "templateKeys": ["OGN:292"]
+    },
+    {
+      "name": "Obelisk of Power",
+      "nameZh": "力量方尖碑",
+      "templateKeys": ["OGN:284"]
+    },
+    {
+      "name": "Reaver’s Row",
+      "nameZh": "劫掠船巷",
+      "templateKeys": ["OGN:285"]
+    }
+  ]
+}

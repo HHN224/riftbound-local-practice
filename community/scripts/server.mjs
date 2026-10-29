@@ -5,8 +5,19 @@ import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
 import crypto from "node:crypto";
 import readline from "node:readline";
+import legality from "../public/local/deck-legality.cjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const port = Number(process.env.FUXUAN_PORT || 4174);
+const banlist = JSON.parse(
+  await fs.readFile(path.join(root, "public/local/banlist.json"), "utf8"),
+);
+const aiDecks = JSON.parse(
+  await fs.readFile(
+    path.join(root, "public/local/ai-legal-decks.json"),
+    "utf8",
+  ),
+);
+const deckRules = legality.create(banlist, aiDecks);
 const sessions = new Map();
 const manifest = JSON.parse(
   await fs.readFile(path.join(root, "mobile/app.manifest"), "utf8"),
@@ -118,6 +129,8 @@ function session() {
     subscribers,
     child,
     command: async (event, payload) => {
+      if (event === "initGame")
+        payload = deckRules.resolveMatch(payload).payload;
       await ready;
       return new Promise((resolve, reject) => {
         const n = ++seq;
@@ -137,6 +150,7 @@ const mime = {
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
   ".mjs": "text/javascript; charset=utf-8",
+  ".cjs": "text/javascript; charset=utf-8",
   ".json": "application/json; charset=utf-8",
   ".css": "text/css",
   ".png": "image/png",
@@ -161,7 +175,11 @@ const server = http.createServer(async (req, res) => {
     )
       return json(res, 403, { error: "Local origin required" });
     if (url.pathname === "/local-api/status")
-      return json(res, 200, { source: "Fuxuan APK local Hermes engine", port });
+      return json(res, 200, {
+        source: "Fuxuan APK local Hermes engine",
+        port,
+        banlistVersion: banlist.checked,
+      });
     if (url.pathname === "/api/mobile-release")
       return json(res, 200, {
         schemaVersion: 1,
@@ -230,7 +248,12 @@ const server = http.createServer(async (req, res) => {
       if (!match) throw Error("Upstream runtime anchor changed");
       html = html.replace(
         match[0],
-        match[0] + '<script src="/local/bridge.js" defer></script>',
+        match[0] +
+          "<script>globalThis.FuxuanBanlist=" +
+          JSON.stringify(banlist) +
+          ";globalThis.FuxuanAiDecks=" +
+          JSON.stringify(aiDecks) +
+          '</script><script src="/local/deck-legality.cjs" defer></script><script src="/local/bridge.js" defer></script>',
       );
       data = Buffer.from(html);
     }
@@ -242,7 +265,11 @@ const server = http.createServer(async (req, res) => {
     });
     res.end(data);
   } catch (e) {
-    json(res, e.code === "ENOENT" ? 404 : 500, { error: e.message });
+    json(
+      res,
+      e.code === "ENOENT" ? 404 : e.code === "DECK_ILLEGAL" ? 400 : 500,
+      { error: e.message },
+    );
   }
 });
 server.listen(port, "127.0.0.1", () =>

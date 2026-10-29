@@ -118,12 +118,16 @@
     }
   }
   const transport = new LocalTransport();
-  globalThis.FuxuanLocal = { transport };
+  globalThis.FuxuanLocal = {
+    transport,
+    deckRules: FuxuanDeckLegality.create(FuxuanBanlist, FuxuanAiDecks),
+  };
   for (const [tag, attribute, path] of [
     ["link", "href", "/local/selection-frames.css"],
     ["script", "src", "/local/selection-frames.js"],
     ["link", "href", "/local/ai-thinking.css"],
     ["script", "src", "/local/ai-thinking.js"],
+    ["script", "src", "/local/ban-labels.js"],
   ]) {
     const element = document.createElement(tag);
     if (tag === "link") element.rel = "stylesheet";
@@ -148,6 +152,40 @@
   document.head.append(personalScript);
   const register = globalThis.__d;
   globalThis.__d = function (factory, id, deps) {
+    if (id === 841) {
+      const original = factory;
+      factory = function (...args) {
+        original(...args);
+        const exports = args[5],
+          store = exports.useGameStore,
+          init = store.getState().initGame;
+        const defaults = exports.deckStore.ensureDefaultDecks.bind(
+          exports.deckStore,
+        );
+        exports.deckStore.ensureDefaultDecks = () => {
+          defaults();
+          if (!exports.deckStore.getSelectedDeckId()) {
+            const first = exports.deckStore
+              .listDecks()
+              .find((deck) => !FuxuanLocal.deckRules.issues(deck).length);
+            if (first) exports.deckStore.setSelectedDeckId(first.id);
+          }
+        };
+        store.setState({
+          initGame(player, opponent) {
+            const result = FuxuanLocal.deckRules.resolveMatch(
+              { deckSelection: player, opponentDeckSelection: opponent },
+              exports.deckStore.listDecks(),
+            );
+            if (result.notice) FuxuanLocal.notify?.(result.notice);
+            return init(
+              result.payload.deckSelection,
+              result.payload.opponentDeckSelection,
+            );
+          },
+        });
+      };
+    }
     if (id === 994) {
       const original = factory;
       factory = function (...args) {

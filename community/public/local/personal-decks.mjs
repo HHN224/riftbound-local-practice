@@ -65,6 +65,9 @@ const notify = (message) => {
     toast.hidden = true;
   }, 4500);
 };
+FuxuanLocal.notify = notify;
+const legalitySummary = node("p", null, "pd-legality-summary");
+pageView.querySelector(".pd-tools").after(legalitySummary);
 const explain = (error) =>
   error instanceof Error ? error.message : String(error);
 
@@ -199,6 +202,12 @@ function render() {
   if (!store) return;
   const decks = store.list(),
     current = currentId();
+  const illegal = decks.filter(
+    (deck) => FuxuanLocal.deckRules.issues(deck).length,
+  );
+  legalitySummary.textContent = illegal.length
+    ? `${illegal.length} 套卡组含禁卡，暂不可用于标准构筑：${illegal.map((d) => d.name).join("、")}。请编辑修正，原卡组已保留。`
+    : `全部 ${decks.length} 套个人卡组未命中禁卡表（${FuxuanLocal.deckRules.policy.effective}）。`;
   pageView.querySelector(".pd-total").textContent = String(
     decks.length,
   ).padStart(2, "0");
@@ -244,6 +253,8 @@ function render() {
       info.append(source);
     }
     const actions = node("div", null, "pd-deck-actions");
+    const problem = FuxuanLocal.deckRules.error(deck);
+    if (problem) info.append(node("p", problem, "pd-ban-warning"));
     const action = (label, fn, className) => {
       const button = node("button", label, className);
       button.type = "button";
@@ -251,11 +262,16 @@ function render() {
       actions.append(button);
       return button;
     };
-    action(
-      current === deck.id ? "当前使用" : "使用这套卡组",
+    const use = action(
+      problem
+        ? "含禁卡 · 不可使用"
+        : current === deck.id
+          ? "当前使用"
+          : "使用这套卡组",
       () => useDeck(deck.id),
       "pd-primary",
     );
+    use.disabled = !!problem;
     action("编辑", () => {
       activate(deck);
       FuxuanLocal.editPersonalDeck(deck.id);
@@ -303,6 +319,8 @@ function activate(deck) {
 function useDeck(id) {
   const deck = store.get(id);
   if (!deck) throw Error("这套个人卡组已被移出。");
+  const problem = FuxuanLocal.deckRules.error(deck);
+  if (problem) throw Error(problem);
   activate(deck);
   close();
   notify("已切换：" + deck.name + "。点击「人机对战」开始练习。");

@@ -174,6 +174,13 @@
     hover.style.left = x < innerWidth / 2 ? "auto" : "12px";
     hover.style.right = x < innerWidth / 2 ? "12px" : "auto";
     hover.hidden = false;
+    const ban = FuxuanLocal.deckRules.issues({
+      mainDeckCardIds: [data.card.templateId || data.card.id],
+    });
+    if (ban.length)
+      hover.append(
+        textElement("p", "标准构筑禁用 · " + ban[0].nameZh, "fx-ban-warning"),
+      );
   }
   function pin(data) {
     hideHover();
@@ -198,6 +205,19 @@
         ),
       );
     modal.hidden = false;
+    const ban = FuxuanLocal.deckRules.issues({
+      mainDeckCardIds: [data.card.templateId || data.card.id],
+    });
+    if (ban.length)
+      modal
+        .querySelector(".fx-reader-text")
+        .append(
+          textElement(
+            "p",
+            "标准构筑禁用（" + FuxuanLocal.deckRules.policy.effective + "）",
+            "fx-ban-warning",
+          ),
+        );
     closeButton.focus({ preventScroll: true });
   }
   function close() {
