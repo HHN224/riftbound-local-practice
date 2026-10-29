@@ -39,3 +39,7 @@
 薇古丝使用 [Mobalytics 的成都亚军完整卡表](https://mobalytics.gg/riftbound/decks/vex-gloomist-s4-chengdu-national-open-2nd-xxt-tqw)，以 [赛事总览](https://mobalytics.gg/riftbound/tournaments/s4-chengdu-national-open) 和 [Runes & Rift 的成都八强卡表](https://runesandrift.com/chengdu-national-open-top-8-decklists/) 交叉确认选手、名次与主备数量。Mobalytics 保留 5 翠意 / 7 混沌与三张战场：Forbidding Waste、Fortified Position、Startipped Peak；Runes & Rift 的正文没有列出符文和战场，未自行猜测这些字段。薇古丝主牌区显示两行各 1 张 Apathetic，其中第一张为选定英雄，另一张保留在其余 39 张主牌中。共 40 张主牌，不额外多加英雄。
 
 三套均为第四弹 Vendetta 环境的已出成绩赛事构筑，不标为第五弹 Radiance 最新环境最强。卡号按已有英文 Riftcodex 数据快照的普通版对应本地卡池；所有卡图、规则与 AI 继续使用现有 APK 版本。加入三套不会覆盖已有五套推荐或用户的编辑；已有浏览器结束当前局后刷新，即可由增量导入机制加入“我的卡组”。
+
+## 2026-10-29 凯南上位
+
+新增 **DSG AwesumRosum** 的洛杉矶区域资格赛卡表：凯南同英雄第 1 / 165、赛事总排名 **13**，名称为「凯南 · 洛杉矶第13 · 法术连锁」。来源是前述 [Riot 官方完整卡表](https://playriftbound.com/en-us/news/organizedplay/los-angeles-top-decks/)，不标为八强。传奇 VEN·155、英雄 VEN·113，符文混沌 9 / 序理 3；保留主备和 Minefield、Shadow Temple、Zaun Warrens 三战场。已核对现行禁卡并通过原宿主行动阶段。法术连锁、Lightning Rush、Seal of Discord 等为原表内容，没有塞回已禁用的 Stacked Deck。
