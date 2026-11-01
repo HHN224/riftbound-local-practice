@@ -58,8 +58,10 @@ npm run test:browser
 | 文档 | 内容 |
 | --- | --- |
 | [START-HERE.md](START-HERE.md) | 使用、保存卡组与快捷键 |
+| [桌面发布说明](community/desktop/README.md) | Windows 单文件 EXE 打包与发布 |
 | [BUILD.md](community/engine/BUILD.md) | Hermes 宿主构建及运行方式 |
 | [VALIDATION.md](community/research/VALIDATION.md) | 已验证范围和限制 |
+| [BANLIST.md](community/research/BANLIST.md) | 标准构筑禁卡与 AI 合法替代卡组 |
 | [RECOMMENDED-DECKS.md](community/research/RECOMMENDED-DECKS.md) | 预置卡表来源 |
 | [PLAY-GUIDE.md](community/research/PLAY-GUIDE.md) | 奥恩、狗头、挖掘机起手与打法速查 |
 | [FINDINGS.md](community/research/FINDINGS.md) | 原始调查与版本证据 |
