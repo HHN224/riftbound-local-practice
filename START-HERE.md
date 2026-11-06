@@ -74,6 +74,8 @@ npm run test:browser             # 后台 Edge 完整人机对局和 Sandbox 测
 npm run test:readability         # 三种桌面尺寸的悬停、战场、符文、拖牌检查
 npm run test:feedback            # 桌布排除、横置选框与 AI 思考状态
 npm run test:resolution          # 结算来源框方向、战力飘字与原引擎 +1/+2 法术
+npm run test:scoring             # Sandbox 验证征服战场时的第八分限制
+npm run test:banlist             # 标准构筑禁卡拦截、AI 替代卡组与 Sandbox 例外
 npm run test:decks               # 个人卡组持久化、导入、切换与推荐卡组开局
 powershell -File community/Start-Local.ps1 -NoBrowser  # 只启动后台服务
 ```
