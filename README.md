@@ -81,3 +81,5 @@ npm run test:browser
 这是非官方个人练牌适配。Riftbound、卡牌名称与美术归相应权利人所有；社区代码保留原作者权利。Hermes 和依赖的许可证见 [engine/licenses/](community/engine/licenses/)。本仓库未为第三方捕获内容重新授予开源许可。
 
 发布历史只包含当前符玄本地版。退役的 Nakamabound 项目与原工作区提交留在本机归档，不包含在 GitHub 的 `main` 中。
+
+文档最近核对：2026-11-08。这次只更新说明文字，规则、卡池和对局行为保持不变。
