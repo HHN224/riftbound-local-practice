@@ -1,9 +1,11 @@
 {
   "format": "Standard Constructed 1v1",
   "effective": "2026-09-18",
-  "checked": "2026-10-29",
+  "checked": "2026-11-18",
+  "upcomingEffective": "2026-11-23",
   "source": "https://playriftbound.com/en-us/rules-hub/",
   "announcement": "https://playriftbound.com/en-us/news/announcements/september-ban-list-updates-effective-september-18-2026/",
+  "upcomingAnnouncement": "https://playriftbound.com/en-us/news/announcements/radiance-ban-list-updates-effective-november-23-2026/",
   "cards": [
     {
       "name": "Called Shot",
@@ -64,6 +66,66 @@
       "name": "Reaver’s Row",
       "nameZh": "劫掠船巷",
       "templateKeys": ["OGN:285"]
+    },
+    {
+      "name": "Riven, Broken Blade",
+      "nameZh": "锐雯 - 断剑之誓",
+      "effective": "2026-11-23",
+      "templateKeys": ["RAD:43"]
+    },
+    {
+      "name": "Zhonya's Hourglass",
+      "nameZh": "中娅沙漏",
+      "effective": "2026-11-23",
+      "templateKeys": ["OGN:77"]
+    },
+    {
+      "name": "Stellacorn Herder",
+      "nameZh": "天角牧者",
+      "effective": "2026-11-23",
+      "templateKeys": ["SFD:48"]
+    },
+    {
+      "name": "Nocturne, Horrifying",
+      "nameZh": "魔腾 - 惊魂夜",
+      "effective": "2026-11-23",
+      "templateKeys": ["OGN:194"]
+    },
+    {
+      "name": "Rhasa the Sunderer",
+      "nameZh": "裂魂者喇煞",
+      "effective": "2026-11-23",
+      "templateKeys": ["OGN:195"]
+    },
+    {
+      "name": "Brynhir Thundersong",
+      "nameZh": "颂雷者 布林希尔",
+      "effective": "2026-11-23",
+      "templateKeys": ["OGN:26"]
+    },
+    {
+      "name": "Dazzling Aurora",
+      "nameZh": "闪耀极光",
+      "effective": "2026-11-23",
+      "templateKeys": ["OGN:160"]
+    },
+    {
+      "name": "Baited Hook",
+      "nameZh": "海兽钓钩",
+      "effective": "2026-11-23",
+      "templateKeys": ["OGN:242"]
+    },
+    {
+      "name": "Emperor's Dais",
+      "nameZh": "帝王神坛",
+      "effective": "2026-11-23",
+      "templateKeys": ["SFD:207"]
+    },
+    {
+      "name": "Star Spring",
+      "nameZh": "流星疗泉",
+      "effective": "2026-11-23",
+      "templateKeys": ["UNL:215"]
     }
   ]
 }

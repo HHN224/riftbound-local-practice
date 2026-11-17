@@ -207,7 +207,7 @@ function render() {
   );
   legalitySummary.textContent = illegal.length
     ? `${illegal.length} 套卡组含禁卡，暂不可用于标准构筑：${illegal.map((d) => d.name).join("、")}。请编辑修正，原卡组已保留。`
-    : `全部 ${decks.length} 套个人卡组未命中禁卡表（${FuxuanLocal.deckRules.policy.effective}）。`;
+    : `全部 ${decks.length} 套个人卡组未命中当前生效的禁卡（核对 ${FuxuanLocal.deckRules.policy.checked}）。`;
   pageView.querySelector(".pd-total").textContent = String(
     decks.length,
   ).padStart(2, "0");

@@ -214,7 +214,9 @@
         .append(
           textElement(
             "p",
-            "标准构筑禁用（" + FuxuanLocal.deckRules.policy.effective + "）",
+            "标准构筑禁用（" +
+              (ban[0].effective || FuxuanLocal.deckRules.policy.effective) +
+              "）",
             "fx-ban-warning",
           ),
         );

@@ -8,11 +8,31 @@
     error.code = "DECK_ILLEGAL";
     return error;
   }
-  function create(policy, pool) {
+  function dayOf(input) {
+    if (typeof input === "string" && /^\d{4}-\d{2}-\d{2}$/.test(input))
+      return input;
+    const value = input instanceof Date ? input : new Date();
+    return (
+      value.getFullYear() +
+      "-" +
+      String(value.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(value.getDate()).padStart(2, "0")
+    );
+  }
+  function create(policy, pool, options = {}) {
     const banned = new Map(
       policy.cards.flatMap((card) => card.templateKeys.map((id) => [id, card])),
     );
-    function issues(deck) {
+    function currentDay() {
+      if (typeof options.now === "function") return dayOf(options.now());
+      if (options.now) return dayOf(options.now);
+      return dayOf(new Date());
+    }
+    function cardDay(card) {
+      return card.effective || policy.effective;
+    }
+    function issues(deck, day = currentDay()) {
       const ids = [
         deck?.legendCardId,
         deck?.heroCardId,
@@ -24,22 +44,28 @@
           "sideboardCardIds",
         ].flatMap((zone) => deck?.[zone] || []),
       ];
-      return [...new Set(ids.map((id) => banned.get(key(id))).filter(Boolean))];
+      return [
+        ...new Set(
+          ids
+            .map((id) => banned.get(key(id)))
+            .filter((card) => card && cardDay(card) <= day),
+        ),
+      ];
     }
-    function error(deck) {
-      const hits = issues(deck);
+    function error(deck, day = currentDay()) {
+      const hits = issues(deck, day);
       return hits.length
         ? "标准构筑不可用：" +
             hits.map((c) => c.nameZh).join("、") +
             "（禁卡表 " +
-            policy.effective +
+            [...new Set(hits.map(cardDay))].join("、") +
             "）"
         : "";
     }
     function resolveMatch(payload, extra = []) {
       if (!payload?.deckSelection?.mainDeckCardIds)
         throw illegal("请选择完整卡组。");
-      const problem = error(payload.deckSelection);
+      const problem = error(payload.deckSelection, currentDay());
       if (problem) throw illegal("你的卡组" + problem);
       const legal = [...extra, ...pool.decks].filter(
         (deck) => !issues(deck).length,

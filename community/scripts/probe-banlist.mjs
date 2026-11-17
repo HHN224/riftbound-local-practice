@@ -12,16 +12,19 @@ const read = async (name) =>
 const policy = await read("banlist.json"),
   pool = await read("ai-legal-decks.json"),
   recommended = (await read("recommended-decks.json")).decks;
-const rules = legality.create(policy, pool),
-  good = recommended[0];
-assert.equal(policy.cards.length, 12);
+const rules = legality.create(policy, pool, { now: "2026-11-22" }),
+  good = recommended[0],
+  active = policy.cards.filter(
+    (card) => (card.effective || policy.effective) <= "2026-11-22",
+  );
+assert.equal(policy.cards.length, 22);
+assert.equal(active.length, 12);
 for (const card of policy.cards)
   for (const id of card.templateKeys) {
-    assert(
-      rules
-        .issues({ mainDeckCardIds: [id.replace(":", "-")] })
-        .some((c) => c.name === card.name),
-    );
+    const hit = rules
+      .issues({ mainDeckCardIds: [id.replace(":", "-")] })
+      .some((c) => c.name === card.name);
+    assert.equal(hit, active.includes(card), card.name);
   }
 assert.equal(
   rules.issues({ heroCardId: "RAD·061/167", mainDeckCardIds: ["SFD·019/221"] })
@@ -174,7 +177,7 @@ try {
     ),
   );
   console.log(
-    "PASS: 12 bans and aliases, all 10 old AI lists replaced with same champion, personal deck preserved/disabled, HTTP guard, six native AI starts.",
+    "PASS: 12 active bans and aliases, 10 upcoming bans still legal, all 10 old AI lists replaced with same champion, personal deck preserved/disabled, HTTP guard, six native AI starts.",
   );
 } finally {
   await browser.close();
